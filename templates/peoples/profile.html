@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+{% for team in teams%}
+
+<p>Team: {{ team }}}</p>
+{% for member in team.members %}
+
+{% if member != participant %}}
+<p>Members: {{ member }}</p>
+{% endif %}}
+{% endfor %}
+
+{% end block %}
