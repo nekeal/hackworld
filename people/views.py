@@ -1,11 +1,12 @@
 from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView
+from django.views.generic.base import TemplateView
 from .forms import UserRegisterForm
 from .models import Participant, City
 from django.contrib.auth import views as auth_views
 from .forms import ParticipantForm
 from django.contrib.auth import logout, login, authenticate
-
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 class ParticipantCreate(CreateView):
     form_class = UserRegisterForm
@@ -28,7 +29,7 @@ class ParticipantCreate(CreateView):
         print(form.errors)
 
 class LoginView(auth_views.LoginView):
-    template_name = 'user-login.html'
+    template_name = 'peoples/login.html'
 
     def form_valid(self, form):
         print(form.cleaned_data)
@@ -43,3 +44,14 @@ class LoginView(auth_views.LoginView):
 def logout_view(request):
     logout(request)
     return redirect('/')
+
+
+class ProfileView(LoginRequiredMixin, TemplateView):
+    template_name = 'peoples/profile.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        participant = Participant.objects.get(user=self.request.user)
+        context['teams'] = participant.team_set
+        context['participant'] = participant
+        return context

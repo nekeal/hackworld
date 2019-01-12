@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load static %}
+{% load staticfiles %}
+{% load widget_tweaks %}
+
+{% block title %}Log in!{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/registration.css' %}">
+{% endblock %}
+
+{% block content %}
+    <header class="header-main">
+        Log in to your account!
+    </header>
+    <form method="POST" class="register-form" action="{% url 'people:user-register' %}">
+        {% csrf_token %}
+{#            {{ form.as_p }}#}
+        <fieldset>
+            <label for="login">Login</label>
+            <div class="errortext">{{ form.username.errors }}</div>
+{#                <input class="regular-input" type="text" id="login" name="login">#}
+            {{ form.username|attr:'class=regular-input'|attr:'id=login' }}
+        </fieldset>
+        <fieldset>
+            <label for="password">Password</label>
+            <div class="errortext">{{ form.password.errors }}</div>
+            <input class="regular-input" type="password" id="password" name="password">
+            {{ form.password|attr:'class=regular-input'|attr:'id=passsword' }}
+        </fieldset>
+        <div class="buttons">
+            <input type="submit" value="Submit">
+        </div>
+    </form>
+{% endblock content %}
+
+{% block scripts %}
+{% endblock scripts %}
