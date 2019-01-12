@@ -8,8 +8,8 @@ from django.forms.widgets import TextInput
 class UserRegisterForm(UserCreationForm):
     name = forms.CharField(max_length=50)
     surname = forms.CharField(max_length=50)
-    city = forms.ModelChoiceField(queryset=City.objects.all(), widget=TextInput)
-    skill = forms.ModelMultipleChoiceField(queryset=Skill.objects.all())
+    city = forms.CharField(widget=TextInput)
+    skills = forms.ModelMultipleChoiceField(queryset=Skill.objects.all(), required=False)
     class Meta:
         model = User
         fields = ['username', 'email', 'password1', 'password2']
@@ -18,4 +18,4 @@ class UserRegisterForm(UserCreationForm):
 class ParticipantForm(ModelForm):
     class Meta:
         model = Participant
-        fields = ['name', 'surname', 'city']
+        fields = ['name', 'surname', 'city', 'skills']
