@@ -5,11 +5,11 @@ class SkillModelSerializer(ModelSerializer):
 
     class Meta:
         model = Skill
-        fields = ('name',)
+        fields = ('id','name',)
 
 
 class CityModelSerializer(ModelSerializer):
 
     class Meta:
         model = Skill
-        fields = ('name',)
+        fields = ('id','name',)
