@@ -16,6 +16,9 @@ class City(models.Model):
 
 class Skill(models.Model):
     name            = models.CharField(max_length=50)
+
+class ParticipantSkill(models.Model):
+    name            = models.ForeignKey(max_length=50)
     advanced_level  = models. SmallIntegerField(validators=[advance_level_validator,])
 
 class Participant(models.Model):
@@ -23,4 +26,4 @@ class Participant(models.Model):
     surname     = models.CharField(max_length=50)
     city        = models.ForeignKey(City, on_delete=models.SET_NULL, null=True, blank=True)
     email       = models.EmailField()
-    skills      = models.ManyToManyField(Skill)
+    skills      = models.ManyToManyField(ParticipantSkill)
