@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'people',
     'teams',
     'rest_framework',
-    'django_filters'
+    'django_filters',
+    'widget_tweaks'
 ]
 
 MIDDLEWARE = [

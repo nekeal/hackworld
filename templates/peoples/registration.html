@@ -1,4 +1,7 @@
 {% extends "base.html" %}
+{% load static %}
+{% load staticfiles %}
+{% load widget_tweaks %}
 
 {% block title %}Join us!{% endblock %}
 
@@ -13,20 +16,26 @@
     <form class="register-form multiform">
         <div class="step">
             <!-- <div class="step-number"><span>1</span></div> -->
+            {{ form.as_p }}
             <fieldset>
                 <label for="login">Login</label>
-                <div class="errortext">Wartość pól nie zgadza się</div>
-                <input class="regular-input" type="text" id="login" name="login">
+                <div class="errortext">{{ form.email.errors }}</div>
+{#                <input class="regular-input" type="text" id="login" name="login">#}
+                {{ form.username|attr:'class=regular-input'|attr:'id=login' }}
             </fieldset>
             <fieldset>
+                <div class="errortext">     </div>
                 <label for="email">Email</label>
                 <input class="regular-input" type="text" id="email" name="email">
+                {{ form.email|attr:'class=regular-input'|attr:'id=email' }}
             </fieldset>
             <fieldset>
+                <div class="errortext">     </div>
                 <label for="password">Password</label>
                 <input class="regular-input" type="password" id="password" name="password">
             </fieldset>
             <fieldset>
+                <div class="errortext">     </div>
                 <label for="repeat-password">Repeat password</label>
                 <input class="regular-input" type="password" id="repeat-password" name="repeat-password">
             </fieldset>

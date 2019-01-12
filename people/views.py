@@ -6,7 +6,7 @@ from .models import Participant
 
 class ParticipantCreate(CreateView):
     form_class = UserRegisterForm
-    template_name = 'user-register.html'
+    template_name = 'peoples/registration.html'
 
     def form_valid(self, form):
         user = form.save()
@@ -16,3 +16,4 @@ class ParticipantCreate(CreateView):
                            user=user)
         part.save()
         return redirect('../admin/')
+
