@@ -17,4 +17,5 @@ if __name__ == '__main__':
         for row in reader:
             if len(row) > 4 and int(row[4]) == 96:
                 city = City(name=row[6])
+                print(row[6])
                 city.save()
