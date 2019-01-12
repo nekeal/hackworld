@@ -10,4 +10,4 @@ class Team(models.Model):
     teamleader  = models.ForeignKey(Participant, on_delete=models.SET_NULL, null=True, blank=True, related_name='my_teams')
     looking_for = models.BooleanField()
     hackathon   = models.ForeignKey(Hackathon, on_delete=models.CASCADE)
-    candidates  = models.ForeignKey(Participant, on_delete=models.CASCADE, blank=True, null=True)
+    candidates  = models.ManyToManyField(Participant, blank=True)
