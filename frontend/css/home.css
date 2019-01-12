@@ -196,6 +196,12 @@ body {
           transform: rotate(45deg) translate(-12px, -6px);
 }
 
+.menu-options .menu-option {
+  font-size: 1.5rem;
+  margin: 1em 0 0 2em;
+  color: #FFFFFF;
+}
+
 .header-main {
   font-family: "Coda", cursive;
   font-size: 3rem;
@@ -261,6 +267,26 @@ form .prev-step, form .next-step, form input[type="submit"] {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+}
+
+.multiform .step-number {
+  margin-bottom: 0.15em;
+  color: #D1D1D1;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  font-size: 3em;
+  border: 0.1em solid;
+  border-radius: 50%;
+  width: 1.2em;
+  height: 1.2em;
+}
+
+.multiform .step-number span {
+  margin-top: -0.05em;
 }
 
 .multiform .step {
