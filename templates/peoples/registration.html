@@ -16,28 +16,29 @@
     <form method="POST" class="register-form multiform" action="{% url 'people:user-register' %}">
         <div class="step">
             <!-- <div class="step-number"><span>1</span></div> -->
-            {{ form.as_p }}
             <fieldset>
                 <label for="login">Login</label>
-                <div class="errortext">{{ form.email.errors }}</div>
-                {#<input class="regular-input" type="text" id="login" name="login">#}
+                <div class="errortext">{{ form.username.errors }}</div>
+{#                <input class="regular-input" type="text" id="login" name="login">#}
                 {{ form.username|attr:'class=regular-input'|attr:'id=login' }}
             </fieldset>
             <fieldset>
-                <div class="errortext">     </div>
+                <div class="errortext">{{ form.email.errors }}</div>
                 <label for="email">Email</label>
-                <input class="regular-input" type="text" id="email" name="email">
+{#                <input class="regular-input" type="text" id="email" name="email">#}
                 {{ form.email|attr:'class=regular-input'|attr:'id=email' }}
             </fieldset>
             <fieldset>
-                <div class="errortext">     </div>
+                <div class="errortext">{{ form.password.errors }}</div>
                 <label for="password">Password</label>
                 <input class="regular-input" type="password" id="password" name="password">
+                {{ form.password|attr:'class=regular-input'|attr:'id=passsword' }}
             </fieldset>
             <fieldset>
-                <div class="errortext">     </div>
+                <div class="errortext">{{ form.password2.errors }}</div>
                 <label for="repeat-password">Repeat password</label>
-                <input class="regular-input" type="password" id="repeat-password" name="repeat-password">
+{#                <input class="regular-input" type="password" id="repeat-password" name="repeat-password">#}
+                {{ form.password2|attr:'class=regular-input'|attr:'id=repeat-password' }}
             </fieldset>
             <div class="buttons">
                 <button class="next-step">Next &gt;</button>
@@ -45,16 +46,22 @@
         </div>
         <div class="step">
             <fieldset>
+                <div class="errortext">{{ form.name.errors }}</div>
                 <label for="name">First name</label>
-                <input class="regular-input" type="text" id="name" name="name">
+{#                <input class="regular-input" type="text" id="name" name="name">#}
+                {{ form.name|attr:'class=regular-input'|attr:'id=name'}}
             </fieldset>
             <fieldset>
+                <div class="errortext">{{ form.surname.errors }}</div>
                 <label for="surname">Last name</label>
-                <input class="regular-input" type="text" id="surname" name="surname">
+{#                <input class="regular-input" type="text" id="surname" name="surname">#}
+                    {{ form.surname|attr:'class=regular-input'|attr:'id=surname' }}
             </fieldset>
             <fieldset>
                 <label for="location">Where are you from?</label>
-                <input class="regular-input" list="cities" type="text" id="location" name="location">
+{#                <input class="regular-input" list="cities" type="text" id="city" name="city">#}
+                <div class="errortext">{{ form.city.errors }}</div>
+                {{ form.city|attr:'class=regular-input'|attr:'id=location'|attr:'list=cities' }}
                 <datalist id="cities"></datalist>
             </fieldset>
             <div class="buttons">
@@ -64,17 +71,15 @@
         </div>
         <div class="step">
             <fieldset>
+                <div class="errortext">{{ form.skill.errors }}</div>
                 <label for="programming-skills">Programming skills</label>
                 <input type='text' class='search-input' autocomplete='off' placeholder='Start typing...'>
                 <select name="from[]" id="skills" class="multiselect" multiple="multiple">
-                    <option value="1">szymek to kiepski backendowiec</option>
-                    <option value="2">blalba</option>
-                    <option value="3">blablablablablabla</option>
                 </select>
                 <select name="to[]" id="skills_to" class="multiselect" multiple="multiple"></select>
             </fieldset>
             <div class="buttons">
-                <button class="prev-step">&lt; Back</button>
+                <button class="prev-step">&lt;Back</button>
                 <input type="submit" value="Submit">
             </div>
         </div>

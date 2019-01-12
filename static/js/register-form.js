@@ -1,4 +1,4 @@
-let offset = 2;
+let offset = 0;
 
 $(".next-step").click((e) => {
     e.preventDefault();
