@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{% block title %}{% endblock %}</title>
+    {% block styles %}{% endblock %}
+</head>
+<body>
+    <div class="container">
+        <aside class="menu-wrapper">
+            <div class="menu-container">
+                <div class="menu-header">
+                    <div></div>
+                    <div class="menu-logo">
+                        HackWorld
+                    </div> 
+                    <div class="menu-hamburger">
+                        <div class="bar1"></div>
+                        <div class="bar2"></div>
+                        <div class="bar3"></div>
+                    </div>
+                </div>
+                <div class="menu-options">
+                    <div class="menu-option"><a href="#">Zaloguj się</a></div>
+                    <div class="menu-option"><a href="#">Zarejestruj się</a></div>
+                </div>
+            </div>
+        </aside>
+        <main>
+            {% block content %}{% endblock %}
+        </main>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="{% static 'js/menu.js' %}"></script>
+    {% block scripts %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block title %}Join us!{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/registration.css' %}">
+{% endblock %}
+
+{% block content %}
+    <header class="header-main">
+        Join us!
+    </header>
+    <form class="register-form multiform">
+        <div class="step">
+            <!-- <div class="step-number"><span>1</span></div> -->
+            <fieldset>
+                <label for="login">Login</label>
+                <div class="errortext">Wartość pól nie zgadza się</div>
+                <input class="regular-input" type="text" id="login" name="login">
+            </fieldset>
+            <fieldset>
+                <label for="email">Email</label>
+                <input class="regular-input" type="text" id="email" name="email">
+            </fieldset>
+            <fieldset>
+                <label for="password">Password</label>
+                <input class="regular-input" type="password" id="password" name="password">
+            </fieldset>
+            <fieldset>
+                <label for="repeat-password">Repeat password</label>
+                <input class="regular-input" type="password" id="repeat-password" name="repeat-password">
+            </fieldset>
+            <div class="buttons">
+                <button class="next-step">Next &gt;</button>
+            </div>
+        </div>
+        <div class="step">
+            <fieldset>
+                <label for="name">First name</label>
+                <input class="regular-input" type="text" id="name" name="name">
+            </fieldset>
+            <fieldset>
+                <label for="surname">Last name</label>
+                <input class="regular-input" type="text" id="surname" name="surname">
+            </fieldset>
+            <fieldset>
+                <label for="city">City</label>
+                <input class="regular-input" list="cities" type="text" id="city" name="city">
+                <datalist id="cities">
+                    <option value="Kraków"></option>
+                    <option value="Warszawa"></option>
+                    <option value="Katowice"></option>
+                </datalist>
+            </fieldset>
+            <div class="buttons">
+                <button class="prev-step">&lt; Back</button>
+                <button class="next-step">Next &gt;</button>
+            </div>
+        </div>
+        <div class="step">
+            <fieldset>
+                <label for="programming-skills">Programming skills</label>
+                <select id="skills" multiple="multiple"></select>
+            </fieldset>
+            <div class="buttons">
+                <button class="prev-step">&lt; Back</button>
+                <input type="submit" value="Submit">
+            </div>
+        </div>
+    </form>
+{% endblock content %}
+
+{% block scripts %}
+    <script src="{% static 'js/jquery.multi-select.js' %}"></script>
+    <script src="{% static 'js/register-form.js' %}"></script>
+{% endblock scripts %}
