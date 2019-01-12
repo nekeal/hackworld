@@ -14,8 +14,10 @@
         Join us!
     </header>
     <form method="POST" class="register-form multiform" action="{% url 'people:user-register' %}">
+        {% csrf_token %}
         <div class="step">
             <!-- <div class="step-number"><span>1</span></div> -->
+{#            {{ form.as_p }}#}
             <fieldset>
                 <label for="login">Login</label>
                 <div class="errortext">{{ form.username.errors }}</div>
@@ -23,20 +25,20 @@
                 {{ form.username|attr:'class=regular-input'|attr:'id=login' }}
             </fieldset>
             <fieldset>
-                <div class="errortext">{{ form.email.errors }}</div>
                 <label for="email">Email</label>
+                <div class="errortext">{{ form.email.errors }}</div>
 {#                <input class="regular-input" type="text" id="email" name="email">#}
                 {{ form.email|attr:'class=regular-input'|attr:'id=email' }}
             </fieldset>
             <fieldset>
-                <div class="errortext">{{ form.password.errors }}</div>
                 <label for="password">Password</label>
+                <div class="errortext">{{ form.password.errors }}</div>
                 <input class="regular-input" type="password" id="password" name="password">
                 {{ form.password|attr:'class=regular-input'|attr:'id=passsword' }}
             </fieldset>
             <fieldset>
-                <div class="errortext">{{ form.password2.errors }}</div>
                 <label for="repeat-password">Repeat password</label>
+                <div class="errortext">{{ form.password2.errors }}</div>
 {#                <input class="regular-input" type="password" id="repeat-password" name="repeat-password">#}
                 {{ form.password2|attr:'class=regular-input'|attr:'id=repeat-password' }}
             </fieldset>
@@ -46,14 +48,14 @@
         </div>
         <div class="step">
             <fieldset>
-                <div class="errortext">{{ form.name.errors }}</div>
                 <label for="name">First name</label>
+                <div class="errortext">{{ form.name.errors }}</div>
 {#                <input class="regular-input" type="text" id="name" name="name">#}
                 {{ form.name|attr:'class=regular-input'|attr:'id=name'}}
             </fieldset>
             <fieldset>
-                <div class="errortext">{{ form.surname.errors }}</div>
                 <label for="surname">Last name</label>
+                <div class="errortext">{{ form.surname.errors }}</div>
 {#                <input class="regular-input" type="text" id="surname" name="surname">#}
                     {{ form.surname|attr:'class=regular-input'|attr:'id=surname' }}
             </fieldset>
@@ -71,12 +73,12 @@
         </div>
         <div class="step">
             <fieldset>
-                <div class="errortext">{{ form.skill.errors }}</div>
                 <label for="programming-skills">Programming skills</label>
+                <div class="errortext">{{ form.skill.errors }}</div>
                 <input type='text' class='search-input' autocomplete='off' placeholder='Start typing...'>
-                <select name="from[]" id="skills" class="multiselect" multiple="multiple">
+                <select id="skills" class="multiselect" multiple="multiple">
                 </select>
-                <select name="to[]" id="skills_to" class="multiselect" multiple="multiple"></select>
+                <select name="skills" id="skills_to" class="multiselect" multiple="multiple"></select>
             </fieldset>
             <div class="buttons">
                 <button class="prev-step">&lt;Back</button>

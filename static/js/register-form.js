@@ -16,7 +16,7 @@ $(".step").css("transform", `translateX(-${offset*100}%)`);
 
 $("#skills").multiselect({});
 
-$(".search-input").on("keyup", (e) => {
+$(".search-input").on("keydown", (e) => {
     const searchskill = e.currentTarget.value;
     console.log(searchskill);
 
@@ -26,10 +26,10 @@ $(".search-input").on("keyup", (e) => {
     })
 })
 
-$("#location").on("keyup", (e) => {
+$("#location").on("keydown", (e) => {
     const city = e.currentTarget.value;
 
-    if(city.length > 2) {
+    if(city.length > 1) {
         $.get("/api/cities", { name: city })
         .done((cities) => {
             $("#cities").html(cities.map(city => `<option value="${city.name}">`).join(""));
