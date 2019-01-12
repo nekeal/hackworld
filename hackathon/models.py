@@ -13,6 +13,7 @@ class Hackathon(models.Model):
     proof               = models.TextField(help_text='Put here any information about hackathon and optional links to facebook'
                                                      'event or official website ')
     added_by            = models.ForeignKey(User, on_delete=models.SET_DEFAULT, default=get_user)
+    max_size            = models.PositiveIntegerField(default=4)
 
     def __str__(self):
         return self.name
