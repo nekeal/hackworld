@@ -12,6 +12,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 class ParticipantCreate(CreateView):
     form_class = UserRegisterForm
     template_name = 'peoples/registration.html'
+
     # template_name = 'tesst.html'
     
     def post(self, request):
@@ -44,6 +45,7 @@ class ParticipantCreateView(CreateView):
     form_class = ParticipantForm
     template_name = 'tesst.html'
 
+
 class LoginView(auth_views.LoginView):
     template_name = 'peoples/login.html'
 
@@ -51,7 +53,7 @@ class LoginView(auth_views.LoginView):
         print(form.cleaned_data)
         login(form.request, authenticate(form.request, username=form.cleaned_data.get('username'),
                                          password=form.cleaned_data.get('password')))
-        return redirect('/profile')
+        return redirect('/profile/userprofile')
 
     def form_invalid(self, form):
         return super().form_invalid(form)
@@ -68,6 +70,6 @@ class ProfileView(LoginRequiredMixin, TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         participant = Participant.objects.get(user=self.request.user)
-        context['teams'] = participant.team_set
+        context['teams'] = participant.team_set.all()
         context['participant'] = participant
         return context
