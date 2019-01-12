@@ -8,9 +8,11 @@ from .forms import ParticipantForm
 from django.contrib.auth import logout, login, authenticate
 from django.contrib.auth.mixins import LoginRequiredMixin
 
+
 class ParticipantCreate(CreateView):
     form_class = UserRegisterForm
     template_name = 'peoples/registration.html'
+
     # template_name = 'tesst.html'
 
     def form_valid(self, form):
@@ -44,7 +46,6 @@ def logout_view(request):
 
 class ProfileView(LoginRequiredMixin, TemplateView):
     template_name = 'peoples/profile.html'
-
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         participant = Participant.objects.get(user=self.request.user)
