@@ -26,6 +26,8 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    font-size: 1.5rem;
+    color: $white;
 }
 
 .menu-header {
@@ -77,11 +79,54 @@
     }
 }
 
-.menu-options {
+// .menu-options {
 
-    .menu-option {
-        font-size: 1.5rem;
-        margin: 1em 0 0 2em;
-        color: $white;
+    
+//     // padding-bottom: 1.5em;
+//     // border-bottom: 0.1em solid $gray;
+// }
+
+.menu-option {
+    margin: 1em 0 0 2em;
+}
+
+.menu-events {
+    .menu-event {
+        margin: 1em 0 0 2.5em;
+        &:not(:first-child) {
+            margin-top: 2em;
+        }
+
+        .event-date {
+            font-size: 1.2rem;
+            font-weight: 300;
+            color: $gray;
+        }
+
+        .event-name {
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            margin-top: 0.3em;
+
+            img {
+                margin-left: 0.5em;
+                max-width: 3em;
+                max-height: 2.5em;
+            }
+        }
+
+        .event-team {
+            color: $gray;
+            font-weight: 300;
+            margin-top: 0.5em;
+            font-size: 1.2rem;
+        }
+
+        .team-member {
+            margin: 0.5em 0 0 1em;
+            font-weight: 400;
+            font-size: 1.3rem;
+        }
     }
 }
