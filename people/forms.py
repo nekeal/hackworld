@@ -8,7 +8,7 @@ from django.forms.widgets import TextInput
 class UserRegisterForm(UserCreationForm):
     name = forms.CharField(max_length=50)
     surname = forms.CharField(max_length=50)
-    city = forms.CharField(widget=TextInput)
+    city = forms.CharField(max_length=50)
     skills = forms.ModelMultipleChoiceField(queryset=Skill.objects.all(), required=False)
     class Meta:
         model = User

@@ -17,7 +17,8 @@ class ParticipantCreate(CreateView):
     
     def post(self, request):
         user_form = UserRegisterForm(request.POST)
-        skills_id = request.POST.pop('skills')
+        new_dict = {**request.POST}
+        skills_id = new_dict.pop('skills')
         city = City.objects.filter(name=request.POST['city']).first()
         print("kwargs ", {**request.POST, city:city.id })
         profile_form = ParticipantForm({**request.POST,city:city.id })
