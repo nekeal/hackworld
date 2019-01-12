@@ -9,7 +9,8 @@ from django.contrib.auth import logout, login, authenticate
 
 class ParticipantCreate(CreateView):
     form_class = UserRegisterForm
-    template_name = 'peoples/registration.html'
+    # template_name = 'peoples/registration.html'
+    template_name = 'tesst.html'
 
     def form_valid(self, form):
         user = form.save()

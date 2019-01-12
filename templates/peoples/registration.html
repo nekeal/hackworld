@@ -19,25 +19,27 @@
             {{ form.as_p }}
             <fieldset>
                 <label for="login">Login</label>
-                <div class="errortext">{{ form.email.errors }}</div>
+                <div class="errortext">{{ form.username.errors }}</div>
 {#                <input class="regular-input" type="text" id="login" name="login">#}
                 {{ form.username|attr:'class=regular-input'|attr:'id=login' }}
             </fieldset>
             <fieldset>
-                <div class="errortext">     </div>
+                <div class="errortext">{{ form.email.errors }}</div>
                 <label for="email">Email</label>
-                <input class="regular-input" type="text" id="email" name="email">
+{#                <input class="regular-input" type="text" id="email" name="email">#}
                 {{ form.email|attr:'class=regular-input'|attr:'id=email' }}
             </fieldset>
             <fieldset>
-                <div class="errortext">     </div>
+                <div class="errortext">{{ form.password.errors }}</div>
                 <label for="password">Password</label>
                 <input class="regular-input" type="password" id="password" name="password">
+                {{ form.password|attr:'class=regular-input'|attr:'id=passsword' }}
             </fieldset>
             <fieldset>
-                <div class="errortext">     </div>
+                <div class="errortext">{{ form.password2.errors }}</div>
                 <label for="repeat-password">Repeat password</label>
-                <input class="regular-input" type="password" id="repeat-password" name="repeat-password">
+{#                <input class="regular-input" type="password" id="repeat-password" name="repeat-password">#}
+                {{ form.password2|attr:'class=regular-input'|attr:'id=repeat-password' }}
             </fieldset>
             <div class="buttons">
                 <button class="next-step">Next &gt;</button>
@@ -45,16 +47,22 @@
         </div>
         <div class="step">
             <fieldset>
+                <div class="errortext">{{ form.name.errors }}</div>
                 <label for="name">First name</label>
-                <input class="regular-input" type="text" id="name" name="name">
+{#                <input class="regular-input" type="text" id="name" name="name">#}
+                {{ form.name|attr:'class=regular-input'|attr:'id=name'}}
             </fieldset>
             <fieldset>
+                <div class="errortext">{{ form.surname.errors }}</div>
                 <label for="surname">Last name</label>
-                <input class="regular-input" type="text" id="surname" name="surname">
+{#                <input class="regular-input" type="text" id="surname" name="surname">#}
+                    {{ form.surname|attr:'class=regular-input'|attr:'id=surname' }}
             </fieldset>
             <fieldset>
+                <div class="errortext">{{ form.city.errors }}</div>
                 <label for="city">City</label>
-                <input class="regular-input" list="cities" type="text" id="city" name="city">
+{#                <input class="regular-input" list="cities" type="text" id="city" name="city">#}
+                {{ form.password2|attr:'class=regular-input'|attr:'id=city' }}
                 <datalist id="cities">
                     <option value="Kraków"></option>
                     <option value="Warszawa"></option>
@@ -68,11 +76,12 @@
         </div>
         <div class="step">
             <fieldset>
+                <div class="errortext">{{ form.skill.errors }}</div>
                 <label for="programming-skills">Programming skills</label>
                 <select id="skills" multiple="multiple"></select>
             </fieldset>
             <div class="buttons">
-                <button class="prev-step">&lt; Back</button>
+                <button class="prev-step">&lt;Back</button>
                 <input type="submit" value="Submit">
             </div>
         </div>
