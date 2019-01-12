@@ -1,0 +1,23 @@
+{% block content %}
+
+{% for team in team_list %}
+<div>
+    <p> {{ team.name }} </p>
+    <p>members:</p>
+    <ul>
+        {% if team.teamleader %}
+        <li> {{ team.teamleader }} </li>
+        {% endif %}
+        {% for member in team.members.all %}
+            {% if member != team.teamleader %}
+            <li> {{ member }} </li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+    {% if team.looking_for %}
+        <p> Looking for team leader </p>
+    {% endif %}
+</div>
+{% endfor %}
+{% endblock content %}
+
