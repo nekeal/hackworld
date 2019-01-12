@@ -82,3 +82,41 @@ form {
     margin-top: 1.5em;
     margin-left: 1.5em;
 }
+
+.search-input {
+    width: 12.5em;
+    box-sizing: border-box;
+    color: $gray;
+    font-size: inherit;
+    font-family: inherit;
+    padding: 0.5em;
+    border: 0; 
+    background-color: darken($blue-dark, 5%);
+    border-top-left-radius: 0.3em;
+    border-top-right-radius: 0.3em;
+}
+
+.multiselect {
+    font-size: inherit;
+    width: 12.5em;
+    height: 10em;
+    background: $blue-light;
+    color: $white;
+    width: 12.5em;
+    border: 0;
+    border-bottom-left-radius: 0.3em;
+    border-bottom-right-radius: 0.3em;
+
+    option {
+        cursor: pointer;
+        padding: 0.3em 0.5em;
+        white-space: pre-wrap;
+        /* hide text that can't wrap with an ellipsis */
+        overflow: hidden;
+        text-overflow: ellipsis;
+
+        &:hover, &:focus, &:checked, &:active {
+            background-color: $blue-dark;
+        }
+    }
+}

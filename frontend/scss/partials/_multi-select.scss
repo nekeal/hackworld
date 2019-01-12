@@ -16,7 +16,7 @@
   .ms-selectable, .ms-selection {
     background: $blue-light;
     color: $white;
-    width: 10em;
+    width: 12.5em;
     border-radius: 0.3em;
   }
 
@@ -33,6 +33,7 @@
     height: 200px;
     padding: 0;
     overflow-y: auto;
+
   }
 
   .ms-list.ms-focus {
@@ -79,15 +80,3 @@
   }
 }
 
-.search-input {
-  width: 100%;
-  box-sizing: border-box;
-  color: $gray;
-  font-size: inherit;
-  font-family: inherit;
-  padding: 0.5em;
-  border: 0; 
-  background-color: darken($blue-dark, 5%);
-  border-top-left-radius: 0.3em;
-  border-top-right-radius: 0.3em;
-}
