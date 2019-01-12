@@ -14,6 +14,8 @@ class ParticipantCreate(CreateView):
 
     def form_valid(self, form):
         user = form.save()
+        print('form valid')
+        print(form.cleaned_data)
         part = Participant(name=form.cleaned_data.get('name'),
                            surname=form.cleaned_data.get('surname'),
                            city=City.objects.filter(name=form.cleaned_data.get('city'))
@@ -22,6 +24,8 @@ class ParticipantCreate(CreateView):
         part.save()
         return redirect('../admin/')
 
+    def form_invalid(self, form):
+        print(form.errors)
 
 class LoginView(auth_views.LoginView):
     template_name = 'user-login.html'

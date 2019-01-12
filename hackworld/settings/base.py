@@ -26,8 +26,7 @@ SECRET_KEY = 'v4ucb211h=*p-aqf2wx$p9kbv67#y=hd=4b($l&j1sq2!4=u=p'
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
-
+INTERNAL_IPS = ['localhost', '127.0.0.1']
 # Application definition
 
 INSTALLED_APPS = [
@@ -43,6 +42,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'django_filters',
     'widget_tweaks',
+    'debug_toolbar',
 
 ]
 
@@ -54,7 +54,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-#    'debug_toolbar.middleware.DebugToolbarMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 
 ]
 

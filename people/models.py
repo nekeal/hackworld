@@ -43,7 +43,7 @@ class Participant(models.Model):
     surname     = models.CharField(max_length=50)
     city        = models.ForeignKey(City, on_delete=models.SET_NULL, null=True, blank=True)
     email       = models.EmailField()
-    skills      = models.ManyToManyField(ParticipantSkill)
+    skills      = models.ManyToManyField(ParticipantSkill, blank=True)
 
 
     def __str__(self):
