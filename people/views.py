@@ -15,7 +15,7 @@ class ParticipantCreate(CreateView):
         user = form.save()
         part = Participant(name=form.cleaned_data.get('name'),
                            surname=form.cleaned_data.get('surname'),
-                           city=City.objects.get(name=form.cleaned_data.get('city')),
+                           city=City.objects.filter(name=form.cleaned_data.get('city')).first(),
                            user=user)
         part.save()
         return redirect('../admin/')
