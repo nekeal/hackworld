@@ -311,6 +311,45 @@ form .prev-step, form .next-step, form input[type="submit"] {
   margin-left: 1.5em;
 }
 
+.search-input {
+  width: 12.5em;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  color: #D1D1D1;
+  font-size: inherit;
+  font-family: inherit;
+  padding: 0.5em;
+  border: 0;
+  background-color: #1c2d39;
+  border-top-left-radius: 0.3em;
+  border-top-right-radius: 0.3em;
+}
+
+.multiselect {
+  font-size: inherit;
+  width: 12.5em;
+  height: 10em;
+  background: #41658A;
+  color: #FFFFFF;
+  width: 12.5em;
+  border: 0;
+  border-bottom-left-radius: 0.3em;
+  border-bottom-right-radius: 0.3em;
+}
+
+.multiselect option {
+  cursor: pointer;
+  padding: 0.3em 0.5em;
+  white-space: pre-wrap;
+  /* hide text that can't wrap with an ellipsis */
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.multiselect option:hover, .multiselect option:focus, .multiselect option:checked, .multiselect option:active {
+  background-color: #243B4A;
+}
+
 .ms-container {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -320,7 +359,7 @@ form .prev-step, form .next-step, form input[type="submit"] {
 .ms-container .ms-selectable, .ms-container .ms-selection {
   background: #41658A;
   color: #FFFFFF;
-  width: 10em;
+  width: 12.5em;
   border-radius: 0.3em;
 }
 
@@ -382,20 +421,6 @@ form .prev-step, form .next-step, form input[type="submit"] {
   background-color: #eee;
   color: #aaa;
   cursor: text;
-}
-
-.search-input {
-  width: 100%;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
-  color: #D1D1D1;
-  font-size: inherit;
-  font-family: inherit;
-  padding: 0.5em;
-  border: 0;
-  background-color: #1c2d39;
-  border-top-left-radius: 0.3em;
-  border-top-right-radius: 0.3em;
 }
 
 main {

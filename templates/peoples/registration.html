@@ -13,14 +13,14 @@
     <header class="header-main">
         Join us!
     </header>
-    <form class="register-form multiform">
+    <form method="POST" class="register-form multiform" action="{% url 'people:user-register' %}">
         <div class="step">
             <!-- <div class="step-number"><span>1</span></div> -->
             {{ form.as_p }}
             <fieldset>
                 <label for="login">Login</label>
                 <div class="errortext">{{ form.email.errors }}</div>
-{#                <input class="regular-input" type="text" id="login" name="login">#}
+                {#<input class="regular-input" type="text" id="login" name="login">#}
                 {{ form.username|attr:'class=regular-input'|attr:'id=login' }}
             </fieldset>
             <fieldset>
@@ -53,13 +53,9 @@
                 <input class="regular-input" type="text" id="surname" name="surname">
             </fieldset>
             <fieldset>
-                <label for="city">City</label>
-                <input class="regular-input" list="cities" type="text" id="city" name="city">
-                <datalist id="cities">
-                    <option value="Kraków"></option>
-                    <option value="Warszawa"></option>
-                    <option value="Katowice"></option>
-                </datalist>
+                <label for="location">Where are you from?</label>
+                <input class="regular-input" list="cities" type="text" id="location" name="location">
+                <datalist id="cities"></datalist>
             </fieldset>
             <div class="buttons">
                 <button class="prev-step">&lt; Back</button>
@@ -69,7 +65,13 @@
         <div class="step">
             <fieldset>
                 <label for="programming-skills">Programming skills</label>
-                <select id="skills" multiple="multiple"></select>
+                <input type='text' class='search-input' autocomplete='off' placeholder='Start typing...'>
+                <select name="from[]" id="skills" class="multiselect" multiple="multiple">
+                    <option value="1">szymek to kiepski backendowiec</option>
+                    <option value="2">blalba</option>
+                    <option value="3">blablablablablabla</option>
+                </select>
+                <select name="to[]" id="skills_to" class="multiselect" multiple="multiple"></select>
             </fieldset>
             <div class="buttons">
                 <button class="prev-step">&lt; Back</button>
@@ -80,6 +82,6 @@
 {% endblock content %}
 
 {% block scripts %}
-    <script src="{% static 'js/jquery.multi-select.js' %}"></script>
+    <script src="{% static 'js/multiselect.min.js' %}"></script>
     <script src="{% static 'js/register-form.js' %}"></script>
 {% endblock scripts %}

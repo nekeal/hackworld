@@ -19,5 +19,19 @@ $("#skills").multiSelect({
 });
 
 $(".search-input").on("keyup", (e) => {
-    console.log(e.currentTarget.value);
+    const skill = e.currentTarget.value;
+
+    $.get("/api/skills", { name: skill })
+    .done((data) => {
+        console.log(data);
+    })
+})
+
+$("#city").on("keyup", (e) => {
+    const city = e.currentTarget.value;
+
+    $.get("/api/cities", { name: city })
+    .done((data) => {
+        console.log(data);
+    })
 })
