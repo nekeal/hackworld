@@ -16,6 +16,9 @@
     <form method="POST" class="register-form" action="{% url 'people:login' %}">
         {% csrf_token %}
 {#            {{ form.as_p }}#}
+        <div class="errortext">
+            {{ form.errors }}
+        </div>
         <fieldset>
             <label for="login">Login</label>
             <div class="errortext">{{ form.username.errors }}</div>
