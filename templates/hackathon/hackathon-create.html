@@ -1,6 +1,64 @@
-{% extends "base.html" %}\
+{% extends "base.html" %}
+{% load static %}
+{% load staticfiles %}
+{% load widget_tweaks %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/registration.css'%}">
+{% endblock %}
+
 {% block content %}
-
-{{ form.as_p }}
-
+{% comment %} {{ form.as_p }} {% endcomment %}
+    <header class="header-main">
+        Submit hackathon
+    </header>
+    <form class="register-form" method="post">
+        {{ form.errors }}
+        <fieldset>
+            <label for="name">Hackathon name</label>
+            <div class="errortext">{{ form.name.errors }}</div>
+            {{ form.name|attr:'class=regular-input'|attr:'id=name' }}
+        </fieldset>
+        <fieldset>
+            <label for="proof">Description</label>
+            <div class="errortext">{{ form.proof.errors }}</div>
+            {{ form.proof|attr:'class=regular-input'|attr:'id=proof' }}
+        </fieldset>
+        <fieldset>
+            <label for="image">Hackathon logo</label>
+            <div class="errortext">{{ form.image.errors }}</div>
+            {{ form.image|attr:'class=regular-input'|attr:'id=image' }}
+        </fieldset>
+        <fieldset>
+            <label for="official_website">Official website</label>
+            <div class="errortext">{{ form.official_website.errors }}</div>
+            {{ form.official_website|attr:'class=regular-input'|attr:'id=official_website' }}
+        </fieldset>
+        <fieldset>
+            <label for="facebook_page">Facebook page</label>
+            <div class="errortext">{{ form.facebook_page.errors }}</div>
+            {{ form.facebook_page|attr:'class=regular-input'|attr:'id=facebook_page' }}
+        </fieldset>
+        <fieldset>
+            <label for="date">Event date</label>
+            <div class="errortext">{{ form.date.errors }}</div>
+            {{ form.date|attr:'class=regular-input'|attr:'id=date' }}
+        </fieldset>
+        <fieldset>
+            <label for="place">Place address</label>
+            <div class="errortext">{{ form.place.errors }}</div>
+            {{ form.place|attr:'class=regular-input'|attr:'id=place' }}
+        </fieldset>
+        <fieldset>
+            <label for="place_url">Place url</label>
+            <div class="errortext">{{ form.place_url.errors }}</div>
+            {{ form.place_url|attr:'class=regular-input'|attr:'id=place_url' }}
+        </fieldset>
+        <fieldset>
+            <label for="max_size">Max team size</label>
+            <div class="errortext">{{ form.max_size.errors }}</div>
+            {{ form.max_size|attr:'class=regular-input'|attr:'id=max_size' }}
+        </fieldset>
+        <input type="submit" value="Submit">
+    </form>
 {% endblock %}

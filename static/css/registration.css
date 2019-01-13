@@ -491,5 +491,7 @@ main {
       -ms-flex-positive: 1;
           flex-grow: 1;
   background-color: #243B4A;
+  overflow-x: hidden;
+  overflow-y: scroll;
 }
 /*# sourceMappingURL=registration.css.map */
