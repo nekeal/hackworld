@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic.base import TemplateView
 from django.http import HttpResponse
+from django.shortcuts import reverse
 from .forms import UserRegisterForm, ParticipantForm
 from .models import Participant, City, ParticipantSkill
 from django.contrib.auth import views as auth_views
@@ -69,7 +70,7 @@ class LoginView(auth_views.LoginView):
         print(form.cleaned_data)
         login(form.request, authenticate(form.request, username=form.cleaned_data.get('username'),
                                          password=form.cleaned_data.get('password')))
-        return redirect('/profile/userprofile')
+        return redirect(reverse('people:profile'))
 
     def form_invalid(self, form):
         return super().form_invalid(form)
