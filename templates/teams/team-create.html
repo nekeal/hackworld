@@ -15,6 +15,9 @@
     <form class="register-form" method="post">
         {% comment %} {{ form.errors }} {% endcomment %}
         <fieldset>
+            <input type="hidden" name="hackathon" value="{{ request.GET.hackathon }}">
+        </fieldset>
+        <fieldset>
             <label for="name">Team name</label>
             <div class="errortext">{{ form.name.errors }}</div>
             {{ form.name|attr:'class=regular-input'|attr:'id=name' }}
