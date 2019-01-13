@@ -15,7 +15,7 @@
 </header>
 <div class="hackatons">
     {% for hackathon in hackathons %}
-        <a href="{% url 'hackathon:detail' id=hackathon.id %}"><article class="hackaton">
+        <article class="hackaton">
             <div class="hackaton-base">
                 <div>
                     <div class="hackaton-name">{{ hackathon.name }}</div>
@@ -44,7 +44,7 @@
             </a>
             {% endif %}
             </div>
-        </article></a>
+        </article>
 
     {% endfor %}
 </div>

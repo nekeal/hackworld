@@ -19,7 +19,6 @@
     </header>
     <div class="hackaton-details">
         <div class="hackaton-teams">
-            <!-- when user dont have team for this hackaton -->
             {% if not my_team %}
             <a href="{% url 'team-create' %}?hackathon={{ hackathon.id }}">
                 <div class="add-team">
@@ -27,16 +26,14 @@
                     Create team
                 </div>
             </a>
-                {% else %}
-                 <a href="#">
-                <div class="your-team">{{ my_team.first.name }}
+            {% else %}
+            <a href="#">
+                <div class="your-team">
                     <img src="{% static 'img/icons8-edit-filled-50.png' %}">
-
+                    {{ my_team.first.name }}
                 </div>
             </a>
             {% endif %}
-
-            <!-- when user has team - clicking takes to editing page -->
 
             <div class="hackaton-teams-featured">
                 <div class="hackaton-teams-header">
@@ -69,7 +66,7 @@
 {#                                <div class="skill not-owned">Javascript</div>#}
 {#                                <div class="skill owned">Wordpress developer</div>#}
                             </div>
-                            <button>Send join request</button>
+                            <button data-id="{{ team.id }}" class="join-request">Send join request</button>
                         </div>
                     </div>
             {% endfor %}
@@ -86,4 +83,5 @@
 {% endblock content %}
 
 {% block scripts %}
+    <script src="{% static 'js/join-request.js' %}"></script>
 {% endblock scripts %}
