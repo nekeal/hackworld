@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
+from hackathon.views import MainPage
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -23,7 +24,9 @@ urlpatterns = [
     # path('profile/', include('people.urls')),
     path('teams/', include('teams.urls')),
     path('profile/', include('people.urls')),
-    path('hackathon/', include('hackathon.urls'))
+    path('hackathon/', include('hackathon.urls')),
+    path('', MainPage.as_view(), name='index'),
+
 ]
 
 if settings.DEBUG:
