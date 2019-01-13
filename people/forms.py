@@ -12,7 +12,7 @@ class UserRegisterForm(UserCreationForm):
     city = forms.ChoiceField(choices = ((x, x) for x in City.objects.values_list('name', flat=True)), widget=TextInput, required=True)
     skills = forms.ModelMultipleChoiceField(queryset=Skill.objects.all(), required=False)
     short_description = forms.CharField(max_length=100, required=False)
-    description = forms.TextInput(required=False)
+    description = forms.CharField(widget=TextInput, required=False)
 
     class Meta:
         model = User
