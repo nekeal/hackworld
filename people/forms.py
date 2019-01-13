@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
-from .models import Participant, City, Skill
+from .models import Participant, City, Skill, ParticipantSkill
 from django.forms import ModelForm
 from django.forms.widgets import TextInput
 
@@ -16,6 +16,7 @@ class UserRegisterForm(UserCreationForm):
 
 
 class ParticipantForm(ModelForm):
+    # skills = forms.MultipleChoiceField(choices=ParticipantSkill.objects.values_list('id', flat=True))
     class Meta:
         model = Participant
-        fields = ['name', 'surname', 'city', 'skills']
+        fields = ['name', 'surname', 'city']

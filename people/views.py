@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView
 from django.views.generic.base import TemplateView
+from django.http import HttpResponse
 from .forms import UserRegisterForm, ParticipantForm
-from .models import Participant, City
+from .models import Participant, City, ParticipantSkill
 from django.contrib.auth import views as auth_views
 from .forms import ParticipantForm
 from django.contrib.auth import logout, login, authenticate
@@ -17,15 +18,30 @@ class ParticipantCreate(CreateView):
     
     def post(self, request):
         user_form = UserRegisterForm(request.POST)
-        new_dict = {**request.POST}
-        skills_id = new_dict.pop('skills')
         city = City.objects.filter(name=request.POST['city']).first()
-        print("kwargs ", {**request.POST, city:city.id })
-        profile_form = ParticipantForm({**request.POST,city:city.id })
+        new_dict = {**request.POST, 'city':city.id}
+        skills_id = new_dict.get('skills')
+        profile_form = ParticipantForm(new_dict)
+        print(request.POST)
         print(user_form.is_valid(), profile_form.is_valid())
         print(profile_form.errors)
-        print(request.POST)
-        return  super(ParticipantCreate, self).post(request)
+        print(user_form.errors)
+        # print(request.POST)
+        if user_form.is_valid() and profile_form.is_valid():
+            user = user_form.save()
+            user.refresh_from_db()
+            self.object = user
+            participant = profile_form.save(commit=False)
+            participant.save()
+            participant.refresh_from_db()
+            participant.user = user
+            for i in skills_id:
+                ParticipantSkill.objects.create(skill_id=i, participant=participant)
+        else:
+            print(self.object)
+            return self.form_invalid(user_form)
+            # participant.save()
+        return HttpResponse('success') # super(ParticipantCreate, self).post(request)
         
     def form_valid(self, form):
         user = form.save()
