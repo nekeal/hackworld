@@ -3,87 +3,140 @@
 {% load staticfiles %}
 {% load widget_tweaks %}
 
-{% block title %}Team list in hackathon{% endblock %}
+{% block title %}Your teams{% endblock %}
 
 {% block styles %}
     <link rel="stylesheet" href="{% static 'css/hackaton-details.css' %}">
 {% endblock %}
 
 {% block content %}
-    {% for object in object_list %}
-        {{ object.name }}
-    {% endfor %}
-
     <header class="header-main">
-        <div>
-            <div class="header-text">{{ hackathon.name }}</div>
-            <div class="header-subtext">{{ hackathon.place }}</div>
-        </div>
-        <div class="header-image"><img src="{% static 'img/bitehack.png' %}"></div>
+        Your teams
     </header>
     <div class="hackaton-details">
         <div class="hackaton-teams">
-            <!-- when user dont have team for this hackaton -->
-            {% if not my_team %}
-            <a href="{% url 'team-create' %}">
-                <div class="add-team">
-                    <img src="{% static 'img/icons8-plus-filled-50.png' %}">
-                    Create team
-                </div>
-            </a>
-                {% else %}
-                 <a href="#">
-                <div class="your-team">{{ my_team.first.name }}
-                    <img src="{% static 'img/icons8-edit-filled-50.png' %}">
-
-                </div>
-            </a>
-            {% endif %}
-
-            <!-- when user has team - clicking takes to editing page -->
-
             <div class="hackaton-teams-featured">
                 <div class="hackaton-teams-header">
-                    Teams searching for people
+                    Teams you are leader in
                 </div>
                 <div class="hackaton-teams-list">
-
-                    {% for team in queryset %}
-
-                        <div class="hackaton-team">
-                        <div class="data">
-                            <div class="name">{{ team.name }}</div>
-                            <div class="members">
-                                <a href="{{ team.teamleader.get_absolute_url }} "><div class="member leader">{{ team.teamleader.name }} {{ team.teamleader.surname }}</div></a>
-                                {% for member in team.members.all %}
-                                    {% if member != team.teamleader %}
-                                        <a href="{{ member.get_absolute_url }}"><div class="member">{{ member.name }} {{ member.surname }}</div></a>
-                                    {% endif %}
-                                {% endfor %}
+                    {% for team in team_list %}
+                        {% if team.teamleader == request.user.participant %}
+                            <div class="hackaton-team">
+                                <div>
+                                    <div class="data">
+                                        <div class="name">{{team.name}}</div>
+                                        <div class="members">
+                                            <div class="member leader">{{ team.teamleader }}</div>
+                                            {% for member in team.members.all %}
+                                                {% if member != team.teamleader %}
+                                                    <div class="member">{{ member }}</div>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </div>
+                                        {% comment %} <div class="join-requests">
+                                            <img src="{% static 'img/icons8-high-priority-48.png' %}">
+                                            3 join requests!
+                                        </div> {% endcomment %}
+                                    </div>
+                                    <div class="needed">
+                                        You are looking for
+                                        <div class="skill-list">
+                                            {% for skill in team.needed_skill.all %}
+                                                <div class="skill">{{skill.name}}</div>
+                                            {% endfor %}
+                                        </div>
+                                        <button>Edit team</button>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="needed">
-                            Team looks for
-                            <div class="skill-list">
-                                {% for skill in team.needed_skill.all %}
-                                <div class="skill {% if skill.id not in my_skills%}not-{% endif %}owned">{{ skill.name }}</div>
-                                {% endfor %}
-
-{#                                <div class="skill owned">Scrum master</div>#}
-{#                                <div class="skill not-owned">Javascript</div>#}
-{#                                <div class="skill owned">Wordpress developer</div>#}
-                            </div>
-                            <button>Send join request</button>
-                        </div>
-                    </div>
-            {% endfor %}
-
+                        {% endif %}
+                            {% comment %} {% if team.looking_for %}
+                                <p> Looking for team leader </p>
+                            {% endif %} {% endcomment %}
+                    {% endfor %}
                 </div>
+                    {% comment %} <div class="hackaton-team">
+                        <div>
+                            <div class="data">
+                                <div class="name">theBrokenLemurs</div>
+                                <div class="members">
+                                    <div class="member leader">Kamil Krzempek</div>
+                                    <div class="member">Szymon Cader</div>
+                                    <div class="member">Grzegorz Nieużyła</div>
+                                </div>
+                                <div class="join-requests">
+                                    <img src="../img/icons8-high-priority-48.png">
+                                    3 join requests!
+                                </div>
+                            </div>
+                            <div class="needed">
+                                You are looking for
+                                <div class="skill-list">
+                                    <div class="skill">Scrum master</div>
+                                    <div class="skill">Javascript</div>
+                                    <div class="skill">Wordpress developer</div>
+                                </div>
+                                <button>Edit team</button>
+                            </div>
+                        </div>
+                        <div class="requests expand">
+                            <div class="request">
+                                <div class="user">Paweł Tomana</div>
+                                <div class="accept"><img src="../img/icons8-ok-48.png"></div>
+                                <div class="decline"><img src="../img/icons8-cancel-48.png"></div>
+                            </div>
+                            <div class="request">
+                                <div class="user">Paweł Tomana</div>
+                                <div class="accept"><img src="../img/icons8-ok-48.png"></div>
+                                <div class="decline"><img src="../img/icons8-cancel-48.png"></div>
+                            </div>
+                            <div class="request">
+                                <div class="user">Paweł Tomana</div>
+                                <div class="accept"><img src="../img/icons8-ok-48.png"></div>
+                                <div class="decline"><img src="../img/icons8-cancel-48.png"></div>
+                            </div>
+                        </div>
+                    </div> {% endcomment %}
             </div>
-{#            <div class="hackaton-teams-other">#}
-{#                <div class="hackaton-teams-header">#}
-{#                    Other teams#}
-{#                </div>#}
+            <div class="hackaton-teams-other">
+                <div class="hackaton-teams-header">
+                    Teams you are member of
+                </div>
+                <div class="hackaton-teams-list">
+                    {% for team in team_list %}
+                        {% if team.teamleader != request.user.participant %}
+                            <div class="hackaton-team">
+                                <div class="data">
+                                    <div class="name">{{team.name}}</div>
+                                    <div class="members">
+                                        <div class="member leader">{{ team.teamleader }}</div>
+                                        {% for member in team.members.all %}
+                                            {% if member != team.teamleader %}
+                                                <div class="member">{{ member }}</div>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </div>
+                                    {% comment %} <div class="join-requests">
+                                        <img src="{% static 'img/icons8-high-priority-48.png' %}">
+                                        3 join requests!
+                                    </div> {% endcomment %}
+                                </div>
+                                <div class="needed">
+                                    You are looking for
+                                    <div class="skill-list">
+                                        {% for skill in team.needed_skill.all %}
+                                            <div class="skill">{{skill.name}}</div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                            {% comment %} {% if team.looking_for %}
+                                <p> Looking for team leader </p>
+                            {% endif %} {% endcomment %}
+                    {% endfor %}
+                </div>
             </div>
         </div>
     </div>

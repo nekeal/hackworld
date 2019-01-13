@@ -26,9 +26,11 @@
                 {% if hackathon.image %}<div class="hackaton-logo"><img src="{{ hackathon.image.url }}"></div>{% endif %}
             </div>
             <div class="hackaton-description">{{ hackathon.description }}</div>
-            <div class="hackaton-teams">
-                {{ hackathon.complete_c }} full team(s), {{hackathon.incomplete_c}} team(s) looking for members
-            </div>
+            <a href="{% url 'hackathon:detail' id=hackathon.id %}">
+                <div class="hackaton-teams">
+                    {{ hackathon.complete_c }} full team(s), {{hackathon.incomplete_c}} team(s) looking for members
+                </div>
+            </a>
             <div class="hackaton-links">
             {% if hackathon.official_website %}
             <a href="{{ hackathon.official_website }}" target="_blank">
