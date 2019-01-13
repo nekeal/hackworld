@@ -157,7 +157,7 @@ class Participantformset(UpdateView):
     template_name = 'tesst.html'
     form_class = ParticipantForm
     def get_context_data(self, **kwargs):
-        context = super(ParticipantUpdateView, self).get_context_data(**kwargs)
+        context = super(Participantformset, self).get_context_data(**kwargs)
         if self.request.POST:
             context['skill_formset'] = ParticipantSkillFormset(self.request.POST, instance=self.object)
             context['skill_formset'].full_clean()
@@ -177,4 +177,5 @@ class Participantformset(UpdateView):
             return self.render_to_response(self.get_context_data(form=form))
 
     def get_object(self, queryset=None):
-        return self.request.user.participant
+        # return self.request.user.participant
+        return Participant.objects.get(user__username='admin')
