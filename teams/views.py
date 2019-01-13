@@ -2,20 +2,22 @@ from django.shortcuts import render, redirect, reverse
 from django.views.generic.list import ListView
 from django.http import JsonResponse
 from .models import Team
-from .forms import TeamForm
+from .forms import TeamForm, TeamUpdateForm
 from people.models import Participant
 from django.core.mail import send_mail
+from django.views.generic.edit import CreateView, UpdateView, FormView
 from django.views import View
 from hackworld.settings.base import EMAIL_HOST_USER
 from django.views.generic import CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.shortcuts import get_object_or_404
+from django.http import HttpResponseForbidden
+from django.db.models import Q
 
 
 class TeamListView(ListView):
     model = Team
     template_name = 'teams/team-list.html'
-
-
 
 
 class TeamJoinRequestNotifier(View):
@@ -24,7 +26,8 @@ class TeamJoinRequestNotifier(View):
         try:
             team_id = int(team_id)
         except Exception:
-            return JsonResponse({'success': False, 'message': f'Invalid format POST={self.request.POST} GET={request.GET} method={request.method}'})
+            return JsonResponse({'success': False,
+                                 'message': f'Invalid format POST={self.request.POST} GET={request.GET} method={request.method}'})
         participant = Participant.objects.get(user=request.user)
         team = Team.objects.filter(id=team_id)
         if team.count() == 0:
@@ -45,7 +48,8 @@ class TeamJoinRequestNotifier(View):
         )
         if res:
             return JsonResponse({'success': True, 'message': 'Mail sent'})
-        return JsonResponse({'success': False, 'message': f'Added to candidates but could not send mail to {team.teamleader.user.email}'})
+        return JsonResponse({'success': False,
+                             'message': f'Added to candidates but could not send mail to {team.teamleader.user.email}'})
 
 
 class TeamCreate(LoginRequiredMixin, CreateView):
@@ -71,3 +75,32 @@ class TeamCreate(LoginRequiredMixin, CreateView):
         print(form.errors)
 
 
+class TeamUpdateView(FormView):
+    form_class = TeamUpdateForm
+    template_name = 'peoples/edit-team.html'
+    queryset = Participant.objects.all()
+    model = Team
+
+    def dispatch(self, request, *args, **kwargs):
+        id = kwargs['pk']
+        team = get_object_or_404(Team, pk=id)
+        if team.teamleader != request.user.participant:
+            return HttpResponseForbidden()
+        return super(TeamUpdateView, self).dispatch(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super(TeamUpdateView, self).get_context_data(**kwargs)
+        context['form'] = self.get_form(self.form_class)
+        id = self.kwargs['pk']
+        context['members'] = Team.objects.get(pk=id)
+        return context
+
+    def get_form(self, form_class=None):
+        id = self.kwargs['pk']
+        team = Team.objects.get(pk=id)
+        form = self.form_class(
+            initial={'description': team.description,
+                     'looking_for': team.looking_for,
+                     'needed_skill': team.needed_skill.all()
+                     })
+        return form
