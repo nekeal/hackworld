@@ -11,8 +11,27 @@ from hackworld.settings.base import EMAIL_HOST_USER
 from django.views.generic import CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_object_or_404
-from django.http import HttpResponseForbidden
+from django.http import HttpResponseForbidden, JsonResponse
+import json
 from django.db.models import Q
+
+
+
+class AddDeleteCandidate(View):
+    def post(self, request):
+        data = json.loads(request.POST)
+        team = Team.objects.get(id=data['team-id'])
+        participant = Participant.objects.get(id=data['user-id'])
+        if data['accept']:
+            if team.members.count() >= team.hackathon.max_size:
+                return {"success": False, 'message':'Maximum team size reached'}
+            else:
+                team.members.add(participant)
+                team.candidates.remove(participant)
+                return {"success": True, 'message': f'{participant.name} {participant.surname} added to team!'}
+        else:
+            team.candidates.remove(participant)
+            return {"success": True, 'message': f'{participant.name} {participant.surname} removed from candidates!'}
 
 
 class TeamListView(ListView):

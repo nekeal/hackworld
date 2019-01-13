@@ -48,14 +48,16 @@ class ParticipantCreate(CreateView):
     def post(self, request):
         self.object = None
         user_form = UserRegisterForm(request.POST)
-        city = City.objects.filter(name=request.POST['city']).first().id if City.objects.filter(
+        city = City.objects.filter(name=request.POST['city']).first()    if City.objects.filter(
             name=request.POST['city']) else None
         skills_id = request.POST.get('skills')
         profile_form = ParticipantForm({"name": request.POST['name'], 'surname': request.POST['surname'], "city": city})
         if user_form.is_valid() and profile_form.is_valid():
+            print('Forms valid')
             user = user_form.save()
             user.refresh_from_db()
             participant = profile_form.save(commit=False)
+            print(participant.__dict__)
             participant.user = user
             participant.save()
             participant.refresh_from_db()

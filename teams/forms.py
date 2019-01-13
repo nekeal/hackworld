@@ -1,4 +1,4 @@
-from .models import Team
+hasattr() .models import Team
 from django import forms
 from .models import Team, Participant, Skill
 
