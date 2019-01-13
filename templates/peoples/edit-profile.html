@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% load static %}
+{% load staticfiles %}
+{% load widget_tweaks %}
+
+{% block title %}Log in!{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/registration.css' %}">
+{% endblock %}
+
+{% block content %}
+    <header class="header-main">
+        Edit personal data
+    </header>
+    <form class="register-form">
+        <fieldset>
+            <label for="email">Email</label>
+            <input class="regular-input" type="text" id="email" name="email">
+        </fieldset>
+        <fieldset>
+            <label for="password">Password</label>
+            <input class="regular-input" type="password" id="password" name="password">
+        </fieldset>
+        <fieldset>
+            <label for="repeat-password">Repeat password</label>
+            <input class="regular-input" type="password" id="repeat-password" name="repeat-password">
+        </fieldset>
+        <fieldset>
+            <label for="name">First name</label>
+            <input class="regular-input" type="text" id="name" name="name">
+        </fieldset>
+        <fieldset>
+            <label for="surname">Last name</label>
+            <input class="regular-input" type="text" id="surname" name="surname">
+        </fieldset>
+        <fieldset>
+            <label for="short-description">Short description</label>
+            <input class="regular-input" type="text" id="short-description" name="short-description">
+        </fieldset>
+        <fieldset>
+            <label for="city">City</label>
+            <input class="regular-input" list="cities" type="text" id="city" name="city">
+            <datalist id="cities"></datalist>
+        </fieldset>
+        <input type="submit" value="Submit">
+    </form>
+{% endblock content %}
+
+{% block scripts %}
+    <script src="../js/location-select.js"></script>
+{% endblock scripts %}
