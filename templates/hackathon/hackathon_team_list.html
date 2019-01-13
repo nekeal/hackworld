@@ -21,7 +21,7 @@
         <div class="hackaton-teams">
             <!-- when user dont have team for this hackaton -->
             {% if not my_team %}
-            <a href="{% url 'hackathon:create' %}">
+            <a href="{% url 'team-create' %}">
                 <div class="add-team">
                     <img src="{% static 'img/icons8-plus-filled-50.png' %}">
                     Create team
