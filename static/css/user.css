@@ -320,16 +320,13 @@ body {
   margin-top: 0.5em;
 }
 
-.user-details .user-skills .user-skills-list.block {
-  pointer-events: none;
-}
-
 .user-details .user-skills .button {
   margin-top: 0.5em;
   padding: 0.3em 1.2em;
 }
 
 .user-details .user-skills .user-skill {
+  margin-bottom: 0.3em;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -338,8 +335,43 @@ body {
           align-items: center;
 }
 
+.user-details .user-skills .user-skill-remove {
+  opacity: 0.5;
+}
+
 .user-details .user-skills .name {
   margin-right: 0.7em;
+}
+
+.user-details .user-skills .remove {
+  margin-left: 0.7em;
+  cursor: pointer;
+}
+
+.user-details .user-skills .remove img {
+  width: 1.8em;
+}
+
+.user-details .user-skills .add {
+  cursor: pointer;
+}
+
+.user-details .user-skills input {
+  color: #D1D1D1;
+  font-size: inherit;
+  font-family: inherit;
+  padding: 0.2em 0.3em;
+  border: 0;
+  border-radius: 0.5em;
+  background-color: #41658A;
+}
+
+.user-details .user-skills:not(.editing) .user-skills-list {
+  pointer-events: none;
+}
+
+.user-details .user-skills:not(.editing) .button, .user-details .user-skills:not(.editing) .remove, .user-details .user-skills:not(.editing) .add {
+  display: none;
 }
 
 .user-details .user-description {

@@ -41,10 +41,6 @@
 
         .user-skills-list {
             margin-top: 0.5em;
-            &.block {
-                pointer-events: none;
-            }
-
         }
         
         .button {
@@ -53,12 +49,50 @@
         }
 
         .user-skill {
+            margin-bottom: 0.3em;
             display: flex;
             align-items: center;
         }
 
+        .user-skill-remove {
+            opacity: 0.5;
+        }
+
         .name {
             margin-right: 0.7em;
+        }
+
+        .remove {
+            margin-left: 0.7em;
+            cursor: pointer;
+
+            img {
+                width: 1.8em;
+            }
+        }
+
+        .add {
+            cursor: pointer;
+        }
+
+        input {
+            color: $gray;
+            font-size: inherit;
+            font-family: inherit;
+            padding: 0.2em 0.3em;
+            border: 0; 
+            border-radius: 0.5em;
+            background-color: $blue-light;
+        }
+
+        &:not(.editing) {
+            .user-skills-list {
+                pointer-events: none;
+            }
+
+            .button, .remove, .add {
+                display: none;
+            }
         }
 
     }
