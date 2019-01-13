@@ -11,7 +11,7 @@ from django.db.models import Count, Q
 class HackathonCreateView(CreateView):
     model = Hackathon
     form_class = HackathonForm
-    template_name = 'tesst.html'
+    template_name = 'hackathon/create-hackathon.html'
 
     # success_url = '/'
 
@@ -39,7 +39,7 @@ class MainPage(ListView):
     def get_queryset(self):
         res = list(
             Hackathon.objects.filter(accepted=True).values('id', 'name', 'official_website', 'place_url', 'place',
-                                                           'description', 'max_size'))
+                                                           'description', 'max_size', 'facebook_page', 'image', 'date'))
         print(type(res))
         print(res)
         for hack in res:
