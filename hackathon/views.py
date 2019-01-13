@@ -51,3 +51,18 @@ class MainPage(ListView):
                 else:
                     hack['incomplete_c'] += 1
         return res
+
+class HackathonDetailView(ListView):
+    # model = Team
+    template_name = 'hackathon/hackathon_team_list.html'
+
+    def get_context_data(self, object_list=None, **kwargs):
+        context = super(HackathonDetailView, self).get_context_data(**kwargs)
+        context['hackathon'] = Hackathon.objects.get(id=self.kwargs['id'])
+        if Team.objects.filter(hackathon__id=self.kwargs['id']).filter(Q(members=self.request.user.participant)| Q(teamleader=self.request.user.participant)).exists():
+            context['my_team'] = Team.objects.filter(hackathon__id=self.kwargs['id']).filter(Q(members=self.request.user.participant) | Q(teamleader=self.request.user.participant)).distinct()
+            context['queryset'] = self.get_queryset().exclude(name=Team.objects.filter(hackathon__id=self.kwargs['id']).filter(Q(members=self.request.user.participant) | Q(teamleader=self.request.user.participant)).distinct()[0].name)
+        return context
+
+    def get_queryset(self):
+        return Team.objects.filter(hackathon__id=self.kwargs['id'])

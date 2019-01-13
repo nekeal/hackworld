@@ -24,8 +24,10 @@
                     </div>
                 </div>
                 <div class="menu-options">
-                    <div class="menu-option"><a href="{% url 'people:login' %}">Login</a></div>
-                    <div class="menu-option"><a href="{% url 'people:user-register' %}">Register</a></div>
+                   {% if request.user.is_annonymous %}
+                   <div class="menu-option"><a href="{% url 'people:login' %}">Login</a></div>
+                   <div class="menu-option"><a href="{% url 'people:user-register' %}">Register</a></div>
+                   {% endif %}
                 </div>
             </div>
         </aside>

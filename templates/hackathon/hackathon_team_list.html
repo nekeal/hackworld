@@ -12,8 +12,8 @@
 {% block content %}
     <header class="header-main">
         <div>
-            <div class="header-text">BITEhack</div>
-            <div class="header-subtext">Kraków, klub Studio, ul. Wiktora Budryka 8</div>
+            <div class="header-text">{{ hackathon.name }}</div>
+            <div class="header-subtext">{{ hackathon.place }}</div>
         </div>
         <div class="header-image"><img src="{% static 'img/bitehack.png' %}"></div>
     </header>
@@ -27,6 +27,8 @@
                 </div>
             </a> -->
             <!-- when user has team - clicking takes to editing page -->
+            {{ my_team }}
+            {{ queryset }}
             <a href="#">
                 <div class="your-team">
                     <img src="{% static 'img/icons8-edit-filled-50.png' %}">
@@ -38,13 +40,19 @@
                     Teams searching for people with your skills
                 </div>
                 <div class="hackaton-teams-list">
-                    <div class="hackaton-team">
+
+                    {% for team in queryset %}
+
+                        <div class="hackaton-team">
                         <div class="data">
-                            <div class="name">theBrokenLemurs</div>
+                            <div class="name">{{ team.name }}</div>
                             <div class="members">
-                                <div class="member leader">Kamil Krzempek</div>
-                                <div class="member">Szymon Cader</div>
-                                <div class="member">Grzegorz Nieużyła</div>
+                                <div class="member leader">{{ team.teamleader.name }} {{ team.teamleader.surname }}</div>
+                                {% for member in team.members.all %}
+                                    {% if member != team.teamleader %}
+                                        <a href="{{ member.get_absolute_url }}"><div class="member">{{ member.name }} {{ member.surname }}</div></a>
+                                    {% endif %}
+                                {% endfor %}
                             </div>
                         </div>
                         <div class="needed">
@@ -57,6 +65,8 @@
                             <button>Send join request</button>
                         </div>
                     </div>
+            {% endfor %}
+
                 </div>
             </div>
             <div class="hackaton-teams-other">

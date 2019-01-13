@@ -14,7 +14,7 @@
     <header class="header-main">
         <div>
             <div class="header-text">{{ participant.name }} {{ participant.surname }}</div>
-            <div class="header-subtext">Student AGH I roku, informatyka</div>
+            <div class="header-subtext">{{ participant.short_description }}</div>
         </div>
         <div class="header-image"><img src="{% static '/img/avatar.jpg' %}"></div>
     </header>

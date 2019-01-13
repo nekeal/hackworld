@@ -1,6 +1,6 @@
 from django.urls import path
 from .views import ParticipantCreate, LoginView, LogoutView, ProfileView, ParticipantCreateView, ParticipantUpdateView,\
-                    Participantformset, DescriptionUpdateView
+                    Participantformset, DescriptionUpdateView, AlienProfileView
 
 app_name = 'people'
 urlpatterns = [
@@ -11,4 +11,5 @@ urlpatterns = [
     path('', ProfileView.as_view(), name='profile'),
     path('update/', ParticipantUpdateView.as_view(), name='update'),
     path('description/', DescriptionUpdateView.as_view(), name='description'),
+    path('<int:pk>/', AlienProfileView.as_view(), name='alien-profile'),
 ]
