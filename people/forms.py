@@ -44,7 +44,7 @@ class ParticipantForm(ModelForm):
     # skills = forms.MultipleChoiceField(choices=ParticipantSkill.objects.values_list('id', flat=True))
     class Meta:
         model = Participant
-        fields = ['name', 'surname', 'city']
+        fields = ['name',]# 'surname', 'city', 'description']
 
 
     def clean_name(self, value):
@@ -53,8 +53,11 @@ class ParticipantForm(ModelForm):
     def clean_surname(self, value):
         return value or self.instance.surname
 
-    def clean_city(self, value):
-        return value or self.instance.city
+    def clean_city(self):
+        return 0 or self.instance.city_id
+
+    def clean_description(self, value):
+        return value or self.instance.description
 
 
 ParticipantSkillFormset = inlineformset_factory(Participant, ParticipantSkill, fields=['skill', 'advanced_level'],
