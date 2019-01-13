@@ -39,7 +39,7 @@
         <!--</fieldset>-->
         <fieldset>
             <label for="name">First name</label>
-            <input class="regular-input" type="text" id="name" name="name">
+{#            <input class="regular-input" type="text" id="name" name="name">#}
                 <div class="errortext">{{ form.name.errors }}</div>
 {#                <input class="regular-input" type="text" id="surname" name="surname">#}
                     {{ form.name|attr:'class=regular-input'|attr:'id=surname' }}
@@ -54,7 +54,8 @@
         </fieldset>
         <fieldset>
             <label for="short-description">Short description</label>
-            <input class="regular-input" type="text" id="short-description" name="short-description">
+{#            <input class="regular-input" type="text" id="short-description" name="short-description">#}
+            {{ form.short_description|attr:'class=regular-input'|attr:'id=surname' }}
         </fieldset>
         <fieldset>
             <label for="city">City</label>
@@ -67,5 +68,5 @@
 {% endblock content %}
 
 {% block scripts %}
-    <script src="../js/location-select.js"></script>
+    <script src="{% loca %}../js/location-select.js"></script>
 {% endblock scripts %}

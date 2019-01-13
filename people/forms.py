@@ -47,5 +47,15 @@ class ParticipantForm(ModelForm):
         fields = ['name', 'surname', 'city']
 
 
+    def clean_name(self, value):
+        return value or self.instance.name
+
+    def clean_surname(self, value):
+        return value or self.instance.surname
+
+    def clean_city(self, value):
+        return value or self.instance.city
+
+
 ParticipantSkillFormset = inlineformset_factory(Participant, ParticipantSkill, fields=['skill', 'advanced_level'],
                                                 can_delete=True, extra=3)
