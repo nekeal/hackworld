@@ -2,12 +2,16 @@
 
 @import "partials/menu";
 @import "partials/header";
-@import "partials/hackaton-details";
 
 main {
     flex-grow: 1;
     background-color: $blue-dark;
-    // padding: 1em;
     overflow-x: hidden;
     overflow-y: scroll;
+}
+
+.message {
+    margin: 2em;
+    color: $gray;
+    font-size: 1.7rem;
 }

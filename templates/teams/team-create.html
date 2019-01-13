@@ -1,6 +1,47 @@
 {% extends "base.html" %}
+{% load static %}
+{% load staticfiles %}
+{% load widget_tweaks %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/registration.css'%}">
+{% endblock %}
+
 {% block content %}
+    {% comment %} {{ form.as_p }} {% endcomment %}
+    <header class="header-main">
+        Create team
+    </header>
+    <form class="register-form" method="post">
+        {% comment %} {{ form.errors }} {% endcomment %}
+        <fieldset>
+            <label for="name">Team name</label>
+            <div class="errortext">{{ form.name.errors }}</div>
+            {{ form.name|attr:'class=regular-input'|attr:'id=name' }}
+        </fieldset>
+        <fieldset>
+            <label for="needed_skill">Needed skills</label>
+            <div class="errortext">{{ form.needed_skill.errors }}</div>
+            <input type='text' class='search-input' autocomplete='off' placeholder='Start typing...'>
+            <select id="skills" class="multiselect" multiple="multiple"></select>
+            <select name="needed_skill" id="skills_to" class="multiselect" multiple="multiple"></select>
+            {% comment %} {{ form.needed_skill|attr:'class=regular-input'|attr:'id=needed_skill' }} {% endcomment %}
+        </fieldset>
+        <fieldset class="checkbox">
+            <label for="looking_for">Looking for new members? {{ form.looking_for|attr:'class=regular-input'|attr:'id=looking_for' }}</label>
+            <div class="errortext">{{ form.looking_for.errors }}</div>
+        </fieldset>
+        <fieldset>
+            <label for="description">Description</label>
+            <div class="errortext">{{ form.description.errors }}</div>
+            {{ form.description|attr:'class=regular-input'|attr:'id=description' }}
+        </fieldset>
+        <input type="submit" value="Submit">
+    </form>
+{% endblock %}
 
-{{ form.as_p }}
-
+{% block scripts %}
+    <script src="{% static 'js/multiselect.min.js' %}"></script>
+    <script src="{% static 'js/skill-select.js' %}"></script>
+    <script>initMultiselect();</script>
 {% endblock %}

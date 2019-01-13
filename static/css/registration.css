@@ -278,7 +278,17 @@ form {
 }
 
 form fieldset {
-  margin: 0.7em;
+  margin: 1.1em 0.7em;
+}
+
+form fieldset.checkbox {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+form fieldset.checkbox label, form fieldset.checkbox input, form fieldset.checkbox div {
+  display: inline-block;
 }
 
 form label {
@@ -293,6 +303,11 @@ form .errortext {
   color: #DB5461;
   font-size: 1.1rem;
   margin-bottom: 0.2em;
+}
+
+form input[type="checkbox"] {
+  width: 1em;
+  height: 1em;
 }
 
 form .regular-input {
@@ -491,5 +506,7 @@ main {
       -ms-flex-positive: 1;
           flex-grow: 1;
   background-color: #243B4A;
+  overflow-x: hidden;
+  overflow-y: scroll;
 }
 /*# sourceMappingURL=registration.css.map */

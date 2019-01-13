@@ -16,6 +16,8 @@ class TeamListView(ListView):
     template_name = 'teams/team-list.html'
 
 
+
+
 class TeamJoinRequestNotifier(View):
     def post(self, request):
         team_id = self.request.POST.get('team-id', self.request.GET.get('team-id'))
@@ -50,8 +52,6 @@ class TeamCreate(LoginRequiredMixin, CreateView):
     model = Team
     template_name = 'teams/team-create.html'
     form_class = TeamForm
-
-
 
     def form_valid(self, form):
         instance = form.save(commit=False)

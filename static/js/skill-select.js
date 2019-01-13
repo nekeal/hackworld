@@ -13,7 +13,7 @@ $(".search-input").on("keyup", (e) => {
         $.get("/api/skills", { name: skillInput })
         .done((skills) => {
             console.log(skills);
-            $("#skills").html(skills.slice(0, 20).map(skill => `<option id="${skill.id}">${skill.name}</option>`).join(""));
+            $("#skills").html(skills.map(skill => `<option value="${skill.id}">${skill.name}</option>`).join(""));
         })
     }
 })
