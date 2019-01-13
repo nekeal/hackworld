@@ -20,11 +20,12 @@ class ParticipantCreate(CreateView):
     def post(self, request):
         self.object = None
         user_form = UserRegisterForm(request.POST)
-        city = City.objects.filter(name=request.POST['city']).first().id if City.objects.filter(name=request.POST['city']) else None
+        city = City.objects.filter(name=request.POST['city']).first().id if City.objects.filter(
+            name=request.POST['city']) else None
         # new_dict = {**request.POST, 'city':city.id}
         # print(new_dict['name'])
         skills_id = request.POST.get('skills')
-        profile_form = ParticipantForm({"name":request.POST['name'], 'surname':request.POST['surname'], "city": city })
+        profile_form = ParticipantForm({"name": request.POST['name'], 'surname': request.POST['surname'], "city": city})
         if user_form.is_valid() and profile_form.is_valid():
             user = user_form.save()
             user.refresh_from_db()
@@ -38,7 +39,7 @@ class ParticipantCreate(CreateView):
             # print(self.object)
             return self.form_invalid(user_form)
             # participant.save()
-        return HttpResponse('success') # super(ParticipantCreate, self).post(request)
+        return HttpResponse('success')  # super(ParticipantCreate, self).post(request)
 
     def form_valid(self, form):
         user = form.save()
@@ -55,6 +56,7 @@ class ParticipantCreate(CreateView):
     # def form_invalid(self, form):
     #     print(form.errors)
 
+
 class ParticipantCreateView(CreateView):
     form_class = ParticipantForm
     template_name = 'tesst.html'
@@ -62,6 +64,7 @@ class ParticipantCreateView(CreateView):
     def post(self, request, *args, **kwargs):
         print(request.POST)
         return super(ParticipantCreateView, self).post(request, *args, **kwargs)
+
 
 class LoginView(auth_views.LoginView):
     template_name = 'peoples/login.html'
@@ -80,7 +83,6 @@ class LogoutView(auth_views.LogoutView):
     next_page = '/'
 
 
-
 class ProfileView(LoginRequiredMixin, TemplateView):
     template_name = 'peoples/profile.html'
 
@@ -90,6 +92,7 @@ class ProfileView(LoginRequiredMixin, TemplateView):
         context['teams'] = participant.team_set.all()
         context['participant'] = participant
         return context
+
 
 class ParticipantUpdateView(UpdateView):
     form_class = UserUpdateForm
@@ -101,7 +104,12 @@ class ParticipantUpdateView(UpdateView):
     #     return context
 
     def get_form(self, form_class=None):
-        return self.form_class(initial={'name': self.request.user.participant.name})
+        return self.form_class(
+            initial={'name': self.request.user.participant.name,
+                     'surname': self.request.user.participant.surname,
+                     'city': self.request.user.participant.city,
+                     'short_description': self.request.user.participant.short_description,
+                     'email': self.request.user.email})
 
     def post(self, request):
         self.object = None
