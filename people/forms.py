@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from .models import Participant, City, Skill, ParticipantSkill
-from django.forms import ModelForm
+from django.forms import ModelForm, Form
 from django.forms.models import inlineformset_factory
 from django.forms.widgets import TextInput
 
@@ -29,18 +29,24 @@ class UserRegisterForm(UserCreationForm):
     #     return description or self.instance.participant.description
 
 
-class UserUpdateForm(UserRegisterForm):
-    # def __init__(self,user, *args, **kwargs):
-    #     print(kwargs, user)
-    #     form = super(UserUpdateForm, self).__init__(*args, **kwargs)
-    #     # user = kwargs['user']
-    #     print(type(user))
-    #     self.initial['name'] = user.participant.name
-    #     return form
-    class Meta:
-        model = User
-        fields = ['email']
+# class UserUpdateForm(UserRegisterForm):
+#     # def __init__(self,user, *args, **kwargs):
+#     #     print(kwargs, user)
+#     #     form = super(UserUpdateForm, self).__init__(*args, **kwargs)
+#     #     # user = kwargs['user']
+#     #     print(type(user))
+#     #     self.initial['name'] = user.participant.name
+#     #     return form
+#     class Meta:
+#         model = User
+#         fields = ['email']
 
+class UserUpdateForm(Form):
+    city = forms.CharField(required=False)
+    email = forms.EmailField(required=False)
+    name = forms.CharField(required=False)
+    surname = forms.CharField(required=False)
+    short_description = forms.CharField(required=False)
 
 class ParticipantForm(ModelForm):
     # skills = forms.MultipleChoiceField(choices=ParticipantSkill.objects.values_list('id', flat=True))

@@ -107,7 +107,7 @@ class ParticipantUpdateView(UpdateView):
         return self.form_class(
             initial={'name': self.request.user.participant.name,
                      'surname': self.request.user.participant.surname,
-                     'city': self.request.user.participant.city_id,
+                     'city': self.request.user.participant.city,
                      'short_description': self.request.user.participant.short_description,
                      'email': self.request.user.email})
     #
