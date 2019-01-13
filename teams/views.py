@@ -55,7 +55,7 @@ class TeamCreate(LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
         participant = self.request.user.participant
-        data = self.request.POST.cleaned_data
+        data = form.cleaned_data
         team = Team(name=data.get('name'), teamleader=participant, looking_for=data.get('looking_for'),
                     needed_skill=data.get('needed_skill'), description=data.get('description'))
         team.save()

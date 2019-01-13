@@ -2,7 +2,15 @@ form {
     font-size: 1.4rem;
 
     fieldset {
-        margin: 0.7em;
+        margin: 1.1em 0.7em;
+    
+        &.checkbox {
+            display: flex;
+
+            label, input, div {
+                display: inline-block;
+            }
+        }
     }
 
     label {
@@ -17,6 +25,11 @@ form {
         color: $error;
         font-size: 1.1rem;
         margin-bottom: 0.2em;
+    }
+
+    input[type="checkbox"] {
+        width: 1em;
+        height: 1em;
     }
 
     .regular-input {
