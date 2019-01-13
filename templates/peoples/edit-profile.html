@@ -59,12 +59,14 @@
             {{ form.short_description|attr:'class=regular-input'|attr:'id=surname' }}
         </fieldset>
         <fieldset>
-            <label for="city">City</label>
-{#            <input class="regular-input" list="cities" type="text" id="city" name="city">#}
-                            {{ form.city|attr:'class=regular-input'|attr:'id=location'|attr:'list=cities' }}
-
-            <datalist id="cities"></datalist>
-
+            {% comment %} <label for="city">City</label>
+            <input class="regular-input" list="cities" type="text" id="city" name="city">
+            <datalist id="cities"></datalist> {% endcomment %}
+            <label for="location">Where are you from?</label>
+{#                <input class="regular-input" list="cities" type="text" id="city" name="city">#}
+                <div class="errortext">{{ form.city.errors }}</div>
+                {{ form.city|attr:'class=regular-input'|attr:'id=location'|attr:'list=cities' }}
+                <datalist id="cities"></datalist>
         </fieldset>
         <input type="submit" value="Submit">
     </form>

@@ -20,7 +20,8 @@
     </header>
     <div class="user-details" data-id="{{ participant.id }}">
         <div class="user-edit">
-            <a href="#"><div class="button">Edit personal data</div></a>
+            <a href="{% url 'people:update' %}"><div class="button">Edit personal data</div></a>
+            <a href="{% url 'people:update' %}"><div class="button">Change password</div></a>
         </div>
         <div class="user-description">
             <div class="header">Description <span id="description-edit"><img src="{% static 'img/icons8-edit-filled-50.png' %}"></span></div>
@@ -37,17 +38,19 @@
             <div class="header">Skills <span id="skills-edit"><img src="{% static 'img/icons8-edit-filled-50.png' %}"></span></div>
             <div class="user-skills-list block">
                 {% for skill in participant.participantskill_set.all %}
-                 <div class="user-skill" data-id="{{ skill.id }}">
-                    <div class="name" data-id="{{ skill.skill.id }}">{{ skill.skill.name }}</div>
-                    <div class="c-rating c-rating--big" data-rating-value="{{ skill.advanced_level }}">
-                        <button>1</button>
-                        <button>2</button>
-                        <button>3</button>
-                        <button>4</button>
-                        <button>5</button>
+                    <div class="user-skill" data-id="{{ skill.id }}">
+                        <div class="name" data-id="{{ skill.skill.id }}">{{ skill.skill.name }}</div>
+                        <div class="c-rating c-rating--big" data-rating-value="{{ skill.advanced_level }}">
+                            <button>1</button>
+                            <button>2</button>
+                            <button>3</button>
+                            <button>4</button>
+                            <button>5</button>
+                        </div>
+                        <div class="remove"><img src="{% static 'img/icons8-cancel-48.png' %}"></div>
                     </div>
-                </div>
                 {% endfor %}
+                <div class="add"><img src="{% static 'img/icons8-plus-48.png' %}"></div>
 {##}
 {#                <div class="user-skill">#}
 {#                    <div class="name">Wordpress development</div>#}
@@ -70,12 +73,13 @@
 {#                    </div>#}
 {#                </div>#}
             </div>
-            <div class="button">Save</div>
+            <div class="button" id="skills-send">Save</div>
         </div>
     </div>
 {% endblock content %}
 
 {% block scripts %}
+    <script src="{% static 'js/skill-select.js' %}"></script>
     <script src="{% static 'js/profile-edit.js' %}"></script>
 {% endblock scripts %}
 
