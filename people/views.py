@@ -1,11 +1,11 @@
 from django.shortcuts import render, redirect
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic.base import TemplateView
 from django.http import HttpResponse
 from .forms import UserRegisterForm, ParticipantForm
 from .models import Participant, City, ParticipantSkill
 from django.contrib.auth import views as auth_views
-from .forms import ParticipantForm
+from .forms import ParticipantForm, ParticipantSkillFormset
 from django.contrib.auth import logout, login, authenticate
 from django.contrib.auth.mixins import LoginRequiredMixin
 
@@ -89,3 +89,33 @@ class ProfileView(LoginRequiredMixin, TemplateView):
         context['teams'] = participant.team_set.all()
         context['participant'] = participant
         return context
+
+class ParticipantUpdateView(UpdateView):
+    model = Participant
+    success_url='/profile/'
+    template_name = 'tesst.html'
+    form_class = ParticipantForm
+    def get_context_data(self, **kwargs):
+        context = super(ParticipantUpdateView, self).get_context_data(**kwargs)
+        if self.request.POST:
+            context['skill_formset'] = ParticipantSkillFormset(self.request.POST, instance=self.object)
+            context['skill_formset'].full_clean()
+        else:
+            context['skill_formset'] = ParticipantSkillFormset(instance=self.object)
+        return context
+
+    def form_valid(self, form):
+        context = self.get_context_data()
+        formset = context['skill_formset']
+        if formset.is_valid():
+            self.object = form.save()
+            formset.instance = self.object
+            formset.save()
+            return redirect(self.success_url)
+        else:
+            return self.render_to_response(self.get_context_data(form=form))
+
+    def get_object(self, queryset=None):
+        return Participant.objects.first()
+
+    # def

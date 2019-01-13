@@ -8,6 +8,7 @@
 <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
+    elo{{ skill_formset.as_p }}elo
     <input type="submit", value="wyslij">
 </form>
 </body>
