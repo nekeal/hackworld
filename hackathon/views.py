@@ -61,12 +61,13 @@ class HackathonDetailView(LoginRequiredMixin, ListView):
     def get_context_data(self, object_list=None, **kwargs):
         context = super(HackathonDetailView, self).get_context_data(**kwargs)
         context['hackathon'] = Hackathon.objects.get(id=self.kwargs['id'])
+        context['queryset']  = self.get_queryset()
         if Team.objects.filter(hackathon__id=self.kwargs['id']).filter(Q(members=self.request.user.participant)| Q(teamleader=self.request.user.participant)).exists():
             context['has_team'] = True
             context['my_skills'] = list(self.request.user.participant.participantskill_set.values_list('skill__id',flat=True))
             print(context['my_skills'])
             context['my_team'] = Team.objects.filter(hackathon__id=self.kwargs['id']).filter(Q(members=self.request.user.participant) | Q(teamleader=self.request.user.participant)).distinct()
-        context['queryset'] = self.get_queryset().exclude(name=Team.objects.filter(hackathon__id=self.kwargs['id']).filter(Q(members=self.request.user.participant) | Q(teamleader=self.request.user.participant)).distinct().first().name)
+            context['queryset'] = self.get_queryset().exclude(name=Team.objects.filter(hackathon__id=self.kwargs['id']).filter(Q(members=self.request.user.participant) | Q(teamleader=self.request.user.participant)).distinct().first().name)
         return context
 
     def get_queryset(self):
