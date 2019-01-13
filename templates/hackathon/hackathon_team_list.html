@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% load static %}
+{% load staticfiles %}
+{% load widget_tweaks %}
+
+{% block title %}Team list in hackathon{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/hackaton-details.css' %}">
+{% endblock %}
+
+{% block content %}
+    <header class="header-main">
+        <div>
+            <div class="header-text">BITEhack</div>
+            <div class="header-subtext">Kraków, klub Studio, ul. Wiktora Budryka 8</div>
+        </div>
+        <div class="header-image"><img src="{% static 'img/bitehack.png' %}"></div>
+    </header>
+    <div class="hackaton-details">
+        <div class="hackaton-teams">
+            <!-- when user dont have team for this hackaton -->
+            <!-- <a href="#">
+                <div class="add-team">
+                    <img src="{% static 'img/icons8-plus-filled-50.png' %}">
+                    Create team
+                </div>
+            </a> -->
+            <!-- when user has team - clicking takes to editing page -->
+            <a href="#">
+                <div class="your-team">
+                    <img src="{% static 'img/icons8-edit-filled-50.png' %}">
+                    theBrokenLemurs
+                </div>
+            </a>
+            <div class="hackaton-teams-featured">
+                <div class="hackaton-teams-header">
+                    Teams searching for people with your skills
+                </div>
+                <div class="hackaton-teams-list">
+                    <div class="hackaton-team">
+                        <div class="data">
+                            <div class="name">theBrokenLemurs</div>
+                            <div class="members">
+                                <div class="member leader">Kamil Krzempek</div>
+                                <div class="member">Szymon Cader</div>
+                                <div class="member">Grzegorz Nieużyła</div>
+                            </div>
+                        </div>
+                        <div class="needed">
+                            Team looks for
+                            <div class="skill-list">
+                                <div class="skill owned">Scrum master</div>
+                                <div class="skill not-owned">Javascript</div>
+                                <div class="skill owned">Wordpress developer</div>
+                            </div>
+                            <button>Send join request</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="hackaton-teams-other">
+                <div class="hackaton-teams-header">
+                    Other teams
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+
+{% block scripts %}
+{% endblock scripts %}

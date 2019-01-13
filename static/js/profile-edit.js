@@ -54,6 +54,8 @@ $("#skills-send").click(() => {
         data[prefix + index + "-participant"] = $(".user-details").data("id");
     });
 
+    console.log(data);
+
     $.post("/profile/skills/", data)
     .done(data => {
         location.reload();

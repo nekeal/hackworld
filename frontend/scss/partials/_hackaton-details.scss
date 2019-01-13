@@ -90,6 +90,50 @@
             }
         }
 
+        .join-requests {
+            font-size: 1.2rem;
+            margin-top: 0.3em;
+            color: $error;
+            display: flex;
+            align-items: center;
+            img {
+                width: 2.2em;
+                margin-right: 0.3em;
+            }
+        }
+
+        .requests {
+            max-width: 100vw;
+            transition: all 0.4s;
+            &:not(.expand) {
+                max-width: 0;
+                padding: 0;
+            }
+            overflow: hidden;
+            background-color: darken($blue-dark, 7.5%);
+
+            .request {
+                margin: 1em 1.1em 0 1.1em;
+                color: $gray;
+                display: flex;
+                align-items: center;
+
+                .user {
+                    margin-right: 0.3em;
+                }
+                
+                .accept {
+                    cursor: pointer;
+                    margin-right: 0.3em;
+                }
+                
+                .decline {
+                    cursor: pointer;
+
+                }
+            }
+        }
+
         .needed {
             background-color: darken($blue-dark, 10%);
             padding: 1.2em;
