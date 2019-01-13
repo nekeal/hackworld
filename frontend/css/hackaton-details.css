@@ -472,5 +472,6 @@ main {
           flex-grow: 1;
   background-color: #243B4A;
   overflow-x: hidden;
+  overflow-y: scroll;
 }
 /*# sourceMappingURL=hackaton-details.css.map */

@@ -1,6 +1,22 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
+{% load static %}
+{% load staticfiles %}
+{% load widget_tweaks %}
 
+{% block title %}Success{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/basic.css' %}">
+{% endblock %}
 
 {% block content %}
-    {{ message }}
-{% endblock %}
+    <header class="header-main">
+        Hackathon submitted!
+    </header>
+    <div class="message">
+        {{ message }}
+    </div>
+{% endblock content %}
+
+{% block scripts %}
+{% endblock scripts %}

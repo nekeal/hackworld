@@ -374,6 +374,60 @@ body {
   margin-left: 0.5em;
 }
 
+.hackaton-details .hackaton-team .join-requests {
+  font-size: 1.2rem;
+  margin-top: 0.3em;
+  color: #DB5461;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.hackaton-details .hackaton-team .join-requests img {
+  width: 2.2em;
+  margin-right: 0.3em;
+}
+
+.hackaton-details .hackaton-team .requests {
+  max-width: 100vw;
+  -webkit-transition: all 0.4s;
+  transition: all 0.4s;
+  overflow: hidden;
+  background-color: #172630;
+}
+
+.hackaton-details .hackaton-team .requests:not(.expand) {
+  max-width: 0;
+  padding: 0;
+}
+
+.hackaton-details .hackaton-team .requests .request {
+  margin: 1em 1.1em 0 1.1em;
+  color: #D1D1D1;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.hackaton-details .hackaton-team .requests .request .user {
+  margin-right: 0.3em;
+}
+
+.hackaton-details .hackaton-team .requests .request .accept {
+  cursor: pointer;
+  margin-right: 0.3em;
+}
+
+.hackaton-details .hackaton-team .requests .request .decline {
+  cursor: pointer;
+}
+
 .hackaton-details .hackaton-team .needed {
   background-color: #132028;
   padding: 1.2em;
@@ -418,5 +472,6 @@ main {
           flex-grow: 1;
   background-color: #243B4A;
   overflow-x: hidden;
+  overflow-y: scroll;
 }
 /*# sourceMappingURL=hackaton-details.css.map */

@@ -14,9 +14,11 @@
             <div class="menu-container">
                 <div class="menu-header">
                     <div></div>
-                    <div class="menu-logo">
-                        HackWorld
-                    </div> 
+                    <a href="/">
+                        <div class="menu-logo">
+                            HackWorld
+                        </div> 
+                    </a>
                     <div class="menu-hamburger">
                         <div class="bar1"></div>
                         <div class="bar2"></div>
@@ -24,10 +26,14 @@
                     </div>
                 </div>
                 <div class="menu-options">
-                   {% if request.user.is_annonymous %}
-                   <div class="menu-option"><a href="{% url 'people:login' %}">Login</a></div>
-                   <div class="menu-option"><a href="{% url 'people:user-register' %}">Register</a></div>
-                   {% endif %}
+                    {% if request.user.is_anonymous %}
+                        <a href="{% url 'people:login' %}"><div class="menu-option">Login</div></a>
+                        <a href="{% url 'people:user-register' %}"><div class="menu-option">Register</div></a>
+                    {% else %}
+                        <a href="{% url 'people:logout' %}"><div class="menu-option">Logout</div></a>
+                        <a href="{% url 'people:profile' %}"><div class="menu-option">Edit profile</div></a>
+                        <a href="{% url 'hackathon:create' %}"><div class="menu-option">Submit a hackathon</div></a>
+                    {% endif %}
                 </div>
             </div>
         </aside>
