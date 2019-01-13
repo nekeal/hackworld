@@ -1,15 +1,21 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, reverse
 from django.views.generic.list import ListView
 from django.http import JsonResponse
 from .models import Team
+from .forms import TeamForm
 from people.models import Participant
 from django.core.mail import send_mail
 from django.views import View
 from hackworld.settings.base import EMAIL_HOST_USER
+from django.views.generic import CreateView
+from django.contrib.auth.mixins import LoginRequiredMixin
+
 
 class TeamListView(ListView):
     model = Team
     template_name = 'teams/team-list.html'
+
+
 
 
 class TeamJoinRequestNotifier(View):
@@ -40,5 +46,20 @@ class TeamJoinRequestNotifier(View):
         if res:
             return JsonResponse({'success': True, 'message': 'Mail sent'})
         return JsonResponse({'success': False, 'message': f'Added to candidates but could not send mail to {team.teamleader.user.email}'})
+
+
+class TeamCreate(LoginRequiredMixin, CreateView):
+    model = Team
+    template_name = 'teams/team-create.html'
+    form_class = TeamForm
+
+    def form_valid(self, form):
+        participant = self.request.user.participant
+        data = self.request.POST.cleaned_data
+        team = Team(name=data.get('name'), teamleader=participant, looking_for=data.get('looking_for'),
+                    needed_skill=data.get('needed_skill'), description=data.get('description'))
+        team.save()
+        team.members.add(participant)
+        return redirect(reverse('people:profile'))
 
 
