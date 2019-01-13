@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+{% for hackathon in hackathons %}
+    {{ hackathon.name }}
+    {{ hackathon.accepted }}
+
+{% endfor %}
+
+{% endblock %}
+
