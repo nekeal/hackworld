@@ -12,6 +12,7 @@ class Team(models.Model):
     hackathon   = models.ForeignKey(Hackathon, on_delete=models.CASCADE)
     candidates  = models.ManyToManyField(Participant, blank=True)
     needed_skill = models.ManyToManyField(Skill,blank=True)
+    description = models.TextField()
 
     def __str__(self):
         return self.name

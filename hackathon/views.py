@@ -7,12 +7,14 @@ from .forms import HackathonForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 # Create your views here.
 from django.db.models import Count, Q
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
-class HackathonCreateView(CreateView):
+class HackathonCreateView(LoginRequiredMixin, CreateView):
     model = Hackathon
     form_class = HackathonForm
     template_name = 'hackathon/hackathon-create.html'
+
     # success_url = '/'
 
     def form_valid(self, form):
@@ -33,7 +35,7 @@ class MainPage(ListView):
         comp = 0
         context['counts'] = {1: 12, 2: 123}
         context['incomplete_count'] = 0
-        context['complete_count'] = 0  # self.get_queryset().count() - comp
+        context['complete_count'] = 0
         return context
 
     def get_queryset(self):
@@ -49,6 +51,7 @@ class MainPage(ListView):
                 else:
                     hack['incomplete_c'] += 1
         return res
+
 
 class HackathonDetailView(ListView):
     # model = Team
