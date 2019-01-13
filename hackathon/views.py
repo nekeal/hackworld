@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.views.generic import CreateView, ListView
 from .models import Hackathon
 from teams.models import Team
+from people.models import Participant
 from .forms import HackathonForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 # Create your views here.
@@ -57,9 +58,12 @@ class HackathonDetailView(ListView):
         context = super(HackathonDetailView, self).get_context_data(**kwargs)
         context['hackathon'] = Hackathon.objects.get(id=self.kwargs['id'])
         if Team.objects.filter(hackathon__id=self.kwargs['id']).filter(Q(members=self.request.user.participant)| Q(teamleader=self.request.user.participant)).exists():
+            context['has_team'] = True
+            context['my_skills'] = list(self.request.user.participant.participantskill_set.values_list('skill__id',flat=True))
+            print(context['my_skills'])
             context['my_team'] = Team.objects.filter(hackathon__id=self.kwargs['id']).filter(Q(members=self.request.user.participant) | Q(teamleader=self.request.user.participant)).distinct()
             context['queryset'] = self.get_queryset().exclude(name=Team.objects.filter(hackathon__id=self.kwargs['id']).filter(Q(members=self.request.user.participant) | Q(teamleader=self.request.user.participant)).distinct()[0].name)
         return context
 
     def get_queryset(self):
-        return Team.objects.filter(hackathon__id=self.kwargs['id'])
+        return Team.objects.filter(hackathon__id=self.kwargs['id'], looking_for=True)

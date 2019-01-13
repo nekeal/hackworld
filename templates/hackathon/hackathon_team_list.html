@@ -27,17 +27,15 @@
                 </div>
             </a> -->
             <!-- when user has team - clicking takes to editing page -->
-            {{ my_team }}
-            {{ queryset }}
             <a href="#">
-                <div class="your-team">
+                <div class="your-team">{{ my_team.first.name }}
                     <img src="{% static 'img/icons8-edit-filled-50.png' %}">
-                    theBrokenLemurs
+
                 </div>
             </a>
             <div class="hackaton-teams-featured">
                 <div class="hackaton-teams-header">
-                    Teams searching for people with your skills
+                    Teams searching for people
                 </div>
                 <div class="hackaton-teams-list">
 
@@ -47,7 +45,7 @@
                         <div class="data">
                             <div class="name">{{ team.name }}</div>
                             <div class="members">
-                                <div class="member leader">{{ team.teamleader.name }} {{ team.teamleader.surname }}</div>
+                                <a href="{{ team.teamleader.get_absolute_url }} "><div class="member leader">{{ team.teamleader.name }} {{ team.teamleader.surname }}</div></a>
                                 {% for member in team.members.all %}
                                     {% if member != team.teamleader %}
                                         <a href="{{ member.get_absolute_url }}"><div class="member">{{ member.name }} {{ member.surname }}</div></a>
@@ -58,9 +56,13 @@
                         <div class="needed">
                             Team looks for
                             <div class="skill-list">
-                                <div class="skill owned">Scrum master</div>
-                                <div class="skill not-owned">Javascript</div>
-                                <div class="skill owned">Wordpress developer</div>
+                                {% for skill in team.needed_skill.all %}
+                                <div class="skill {% if skill.id not in my_skills%}not-{% endif %}owned">{{ skill.name }}</div>
+                                {% endfor %}
+
+{#                                <div class="skill owned">Scrum master</div>#}
+{#                                <div class="skill not-owned">Javascript</div>#}
+{#                                <div class="skill owned">Wordpress developer</div>#}
                             </div>
                             <button>Send join request</button>
                         </div>
@@ -69,10 +71,10 @@
 
                 </div>
             </div>
-            <div class="hackaton-teams-other">
-                <div class="hackaton-teams-header">
-                    Other teams
-                </div>
+{#            <div class="hackaton-teams-other">#}
+{#                <div class="hackaton-teams-header">#}
+{#                    Other teams#}
+{#                </div>#}
             </div>
         </div>
     </div>
