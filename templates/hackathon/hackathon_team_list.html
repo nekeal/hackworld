@@ -20,19 +20,24 @@
     <div class="hackaton-details">
         <div class="hackaton-teams">
             <!-- when user dont have team for this hackaton -->
-            <!-- <a href="#">
+            {% if not my_team %}
+            <a href="{% url 'hackathon:create' %}">
                 <div class="add-team">
                     <img src="{% static 'img/icons8-plus-filled-50.png' %}">
                     Create team
                 </div>
-            </a> -->
-            <!-- when user has team - clicking takes to editing page -->
-            <a href="#">
+            </a>
+                {% else %}
+                 <a href="#">
                 <div class="your-team">{{ my_team.first.name }}
                     <img src="{% static 'img/icons8-edit-filled-50.png' %}">
 
                 </div>
             </a>
+            {% endif %}
+
+            <!-- when user has team - clicking takes to editing page -->
+
             <div class="hackaton-teams-featured">
                 <div class="hackaton-teams-header">
                     Teams searching for people
