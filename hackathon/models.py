@@ -11,7 +11,7 @@ class Hackathon(models.Model):
     place_url           = models.URLField(blank=True)
     place               = models.CharField(max_length=100, blank=True)
     accepted            = models.BooleanField(default=False)
-    descprition         = models.TextField()
+    description         = models.TextField()
     proof               = models.TextField(help_text='Put here any information about hackathon and optional links to facebook'
                                                      'event or official website ')
     added_by            = models.ForeignKey(User, on_delete=models.SET_DEFAULT, default=get_user)

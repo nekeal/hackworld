@@ -20,6 +20,10 @@ class UserRegisterForm(UserCreationForm):
         model = User
         fields = ['username', 'email', 'password1', 'password2']
 
+
+class UserSimpleUpdateForm(Form):
+    email = forms.EmailField(required=True)
+
     # def clean_short_description(self):
     #     short_description = self.cleaned_data['short_description']
     #     return short_description or self.instance.participant.short_description
@@ -42,17 +46,28 @@ class UserRegisterForm(UserCreationForm):
 #         fields = ['email']
 
 class UserUpdateForm(Form):
-    city = forms.CharField(required=False)
-    email = forms.EmailField(required=False)
-    name = forms.CharField(required=False)
-    surname = forms.CharField(required=False)
+    city = forms.CharField(required=True)
+    email = forms.EmailField(required=True)
+    name = forms.CharField(required=True)
+    surname = forms.CharField(required=True)
     short_description = forms.CharField(required=False)
+
+class DescriptionUpdateForm(ModelForm):
+    description = forms.CharField(widget=TextInput)
+
+    class Meta:
+        model = Participant
+        fields = ('description',)
 
 class ParticipantForm(ModelForm):
     # skills = forms.MultipleChoiceField(choices=ParticipantSkill.objects.values_list('id', flat=True))
+    name = forms.CharField(required=False)
+    surname = forms.CharField(required=False)
+    description = forms.CharField(required=False)
+
     class Meta:
         model = Participant
-        fields = ['name', 'surname', 'city', 'description']
+        fields = ['name', 'surname', 'description']
 
 
     def clean_name(self):
@@ -63,9 +78,11 @@ class ParticipantForm(ModelForm):
         surname = self.cleaned_data['surname']
         return surname or self.instance.surname
 
-    def clean_city(self):
-        city = self.cleaned_data['city']
-        return city.id or self.instance.city_id
+    # def clean_city(self):
+    #     city = self.cleaned_data['city']
+    #     if self.instance.city:
+    #         return self.instance.city
+    #     return None
 
     def clean_description(self):
         description = self.cleaned_data['description']

@@ -6,32 +6,55 @@
 {% block title %}Log in!{% endblock %}
 
 {% block styles %}
-    <link rel="stylesheet" href="{% static 'css/feed.css' %}">
+<link rel="stylesheet" href="{% static 'css/feed.css' %}">
 {% endblock %}
 
 {% block content %}
-    <header class="header-main">
-        Upcoming hackatons
-    </header>
-    <div class="hackatons">
-        <article class="hackaton">
+<header class="header-main">
+    Upcoming hackatons
+</header>
+<div class="hackatons">
+    {% for hackathon in hackathons %}
+    <article class="hackaton">
+        {% if hackathon.place_url %}
+        <a href="{{ hackathon.place_url }}">
+        {% endif %}
             <div class="hackaton-base">
                 <div>
-                    <div class="hackaton-name">BITEhack</div>
-                    <div class="hackaton-place">Kraków, klub Studio, ul. Wiktora Budryka 8</div>
+                    <div class="hackaton-name">{{ hackathon.name }}</div>
+                    <div class="hackaton-place">{{ hackathon.place }}</div>
                 </div>
-                <div class="hackaton-logo"><img src="{% static 'img/bitehack.png' %}"></div>
+                {% if hackathon.image %}
+                <div class="hackaton-logo"><img src="{{ hackathon.image.url }}"></div>
+                {% endif %}
             </div>
-            <div class="hackaton-description">BITEhack to projekt organizowany przez Stowarzyszenie Studentów BEST AGH Kraków. Skierowany jest do pasjonatów szeroko pojętej automatyki, robotyki, programowania, jak również nowych technologii.</div>
-            <div class="hackaton-teams">
-                20 teamów skompletowanych, 8 teamów szuka członków
-            </div>
-            <div class="hackaton-links">
-                <a href="https://bitehack.best.krakow.pl" target="_blank"><div class="hackaton-link"><img src="{% static 'img/icons8-internet-50.png' %}"><span>Hackaton website</span></div></a>
-                <a href="https://www.facebook.com/events/602093706911984/" target="_blank"><div class="hackaton-link"><img src="{% static 'img/icons8-facebook-50.png' %}"><span>Facebok page</span></div></a>
-            </div>
-        </article>
-    </div>
+        {% if hackathon.place_url %}
+        </a>
+        {% endif %}
+        <div class="hackaton-description">{{ hackathon.description }}
+        </div>
+        <div class="hackaton-teams">
+            {{ hackathon.complete_c }} full team(s), {{hackathon.incomplete_c}} team(s) looking for members
+        </div>
+        <div class="hackaton-links">
+            {% if hackathon.official_website %}
+            <a href="{{ hackathon.official_website }}" target="_blank">
+                <div class="hackaton-link"><img
+                        src="{% static 'img/icons8-internet-50.png' %}"><span>Hackaton website</span></div>
+            </a>
+            {% endif %}
+
+            {% if hackathon.facebook_page %}
+            <a href="{{ hackathon.facebook_page }}" target="_blank">
+                <div class="hackaton-link"><img
+                        src="{% static 'img/icons8-facebook-50.png' %}"><span>Facebok page</span></div>
+            </a>
+            {% endif %}
+
+        </div>
+    </article>
+    {% endfor %}
+</div>
 {% endblock content %}
 
 {% block scripts %}
