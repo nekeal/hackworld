@@ -28,12 +28,15 @@ class TeamJoinRequestNotifier(View):
             return JsonResponse({'success': False, 'message': f'Team is already full'})
         if team.members.filter(user=participant.user):
             return JsonResponse({'success': False, 'message': f'You are already in this team'})
-
-        send_mail(
+        if team.candidates.filter(user=participant.user):
+            return JsonResponse({'success': False, 'message': f'Your request is already pending'})
+        team.candidates.add(participant)
+        res = send_mail(
             'Team join request',
             f'User {participant} wants to join your team {team.name}.',
             EMAIL_HOST_USER,
-            [team.teamleader.email]
+            [team.teamleader.user.email]
         )
-        return JsonResponse({'success': True, 'message': 'Mail sent'})
-
+        if res:
+            return JsonResponse({'success': True, 'message': 'Mail sent'})
+        return JsonResponse({'success': False, 'message': f'Added to candidates but could not send mail to {team.teamleader.user.email}'})
