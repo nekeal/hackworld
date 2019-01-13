@@ -36,18 +36,28 @@ $("#skills-send").click(() => {
 
     data[prefix + "TOTAL_FORMS"] = total;
     data[prefix + "INITIAL_FORM"] = initial;
-    data[prefix + "MIN_NUM_FORMS"] = "0";
-    data[prefix + "MAX_NUM_FORMS"] = "1000";
+    data[prefix + "MIN_NUM_FORMS"] = 0;
+    data[prefix + "MAX_NUM_FORMS"] = 1000;
 
     $(".user-skill").each((index, skill) => {
-        data[prefix + index + "-skill"] = $(skill).find("name").data("id");
-        data[prefix + index + "-advanced_level"] = $(skill).find("c-rating").data("rating-value");
-        data[prefix + index + "-id"] = $(skill).data("id");
+        if(!$(skill).hasClass("user-skill-new")) {
+            data[prefix + index + "-skill"] = $(skill).find(".name").data("id");
+            data[prefix + index + "-id"] = $(skill).data("id");
+        }
+        else {
+            data[prefix + index + "-skill"] = $(skill).find("datalist option").data("id");
+        }
+        data[prefix + index + "-advanced_level"] = $(skill).find(".c-rating").data("rating-value");
         if($(skill).hasClass("user-skill-remove")) {
             data[prefix + index + "-DELETE"] = "on";
         }
         data[prefix + index + "-participant"] = $(".user-details").data("id");
     });
+
+    $.post("/profile/skills/", data)
+    .done(data => {
+        console.log(data);
+    }) 
 
 
     console.log(data);
@@ -59,11 +69,13 @@ function setStarsHandler(e) {
     ratingElement.attr("data-rating-value", value);
 }
 
+let counter = 0;
+
 $(".user-skills .add").click((e) => {
     const newRecord = `
         <div class="user-skill user-skill-new">
-            <input onkeyup="skillSearch(event)" type="text" list="skills">
-            <datalist id="skills"></datalist>
+            <input onkeyup="skillSearch(event)" type="text" list="skills${counter}">
+            <datalist id="skills${counter}"></datalist>
             <div class="c-rating c-rating--big" data-rating-value="0">
                 <button>1</button>
                 <button>2</button>
@@ -74,6 +86,7 @@ $(".user-skills .add").click((e) => {
         </div>
     `;
 
+    counter++;
     $(newRecord).insertBefore(e.currentTarget);
     $(".c-rating button").click((e) => {
         setStarsHandler(e);

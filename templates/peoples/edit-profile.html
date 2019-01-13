@@ -21,42 +21,41 @@
             <div class="errortext">{{ form.email.errors }}</div>
             {{ form.email|attr:'class=regular-input'|attr:'id=email' }}
         </fieldset>
-        <fieldset>
-{#            <label for="password">Password</label>#}
-{#            <input class="regular-input" type="password" id="password" name="password">#}
-            <label for="password">Password</label>
-                <div class="errortext">{{ form.password1.errors }}</div>
-{#                <input class="regular-input" type="password" id="password" name="password">#}
-                {{ form.password1|attr:'class=regular-input'|attr:'id=passsword' }}
-        </fieldset>
-        <fieldset>
-{#            <label for="repeat-password">Repeat password</label>#}
-{#            <input class="regular-input" type="password" id="repeat-password" name="repeat-password">#}
-            <label for="repeat-password">Repeat password</label>
-                <div class="errortext">{{ form.password2.errors }}</div>
-{#                <input class="regular-input" type="password" id="repeat-password" name="repeat-password">#}
-                {{ form.password2|attr:'class=regular-input'|attr:'id=repeat-password' }}
-        </fieldset>
+        <!--<fieldset>-->
+<!--{#            <label for="password">Password</label>#}-->
+<!--{#            <input class="regular-input" type="password" id="password" name="password">#}-->
+            <!--<label for="password">Password</label>-->
+                <!--<div class="errortext">{{ form.password1.errors }}</div>-->
+<!--{#                <input class="regular-input" type="password" id="password" name="password">#}-->
+                <!--{{ form.password1|attr:'class=regular-input'|attr:'id=passsword' }}-->
+        <!--</fieldset>-->
+        <!--<fieldset>-->
+<!--{#            <label for="repeat-password">Repeat password</label>#}-->
+<!--{#            <input class="regular-input" type="password" id="repeat-password" name="repeat-password">#}-->
+            <!--<label for="repeat-password">Repeat password</label>-->
+                <!--<div class="errortext">{{ form.password2.errors }}</div>-->
+<!--{#                <input class="regular-input" type="password" id="repeat-password" name="repeat-password">#}-->
+                <!--{{ form.password2|attr:'class=regular-input'|attr:'id=repeat-password' }}-->
+        <!--</fieldset>-->
         <fieldset>
             <label for="name">First name</label>
-            <input class="regular-input" type="text" id="name" name="name">
-             <label for="surname">Last name</label>
-                <div class="errortext">{{ form.surname.errors }}</div>
+{#            <input class="regular-input" type="text" id="name" name="name">#}
+                <div class="errortext">{{ form.name.errors }}</div>
 {#                <input class="regular-input" type="text" id="surname" name="surname">#}
-                    {{ form.surname|attr:'class=regular-input'|attr:'id=surname' }}
+                    {{ form.name|attr:'class=regular-input'|attr:'id=surname' }}
         </fieldset>
         <fieldset>
 {#            <label for="surname">Last name</label>#}
 {#            <input class="regular-input" type="text" id="surname" name="surname">#}
-                                       <label for="surname">Last name</label>
+                <label for="surname">Last name</label>
                 <div class="errortext">{{ form.surname.errors }}</div>
 {#                <input class="regular-input" type="text" id="surname" name="surname">#}
                     {{ form.surname|attr:'class=regular-input'|attr:'id=surname' }}
         </fieldset>
         <fieldset>
             <label for="short-description">Short description</label>
-            <input class="regular-input" type="text" id="short-description" name="short-description">
-
+{#            <input class="regular-input" type="text" id="short-description" name="short-description">#}
+            {{ form.short_description|attr:'class=regular-input'|attr:'id=surname' }}
         </fieldset>
         <fieldset>
             <label for="city">City</label>
@@ -69,5 +68,5 @@
 {% endblock content %}
 
 {% block scripts %}
-    <script src="../js/location-select.js"></script>
+    <script src="{% loca %}../js/location-select.js"></script>
 {% endblock scripts %}

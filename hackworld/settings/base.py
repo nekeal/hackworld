@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django_filters',
     'widget_tweaks',
     'debug_toolbar',
+    'dynamic_formsets',
 
 ]
 

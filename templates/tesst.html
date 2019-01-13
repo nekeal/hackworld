@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,8 +9,20 @@
 <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
-    elo{{ skill_formset.as_p }}elo
+{{ skill_formset.media }}
+
+    {% for f in skill_formset %}
+<div class="individual-form">
+{{ f.as_p }}
+</div>
+    {% endfor %}
+{#    elo{{ skill_formset.as_p }}elo#}
     <input type="submit", value="wyslij">
 </form>
+<script src="{% static "dynamic_formsets/jquery.formset.js" %}" type="text/javascript"> </script>
+
+<script type="text/javascript">
+$('.individual-form').formset();
+</script>
 </body>
 </html>

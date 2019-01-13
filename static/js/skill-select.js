@@ -18,16 +18,23 @@ $(".search-input").on("keyup", (e) => {
     }
 })
 
+function setSkill(e) {
+    console.log(e);
+}
+
 function skillSearch(e) {
+    const skillDatalist = $(e.currentTarget).next();
     const skillInput = e.currentTarget.value;
+
+    console.log(skillDatalist);
     
     if(skillInput !== prevSkillInput && skillInput !== "") {
         prevSkillInput = skillInput;
-        $("#skills").empty();
+        skillDatalist.empty();
         $.get("/api/skills", { name: skillInput })
         .done((skills) => {
             console.log(skills);
-            $("#skills").html(skills.slice(0, 20).map(skill => `<option data-id="${skill.id}">${skill.name}</option>`).join(""));
+            skillDatalist.html(skills.slice(0, 20).map(skill => `<option onclick="setSkill(event)" data-id="${skill.id}">${skill.name}</option>`).join(""));
         })
     }
 }
