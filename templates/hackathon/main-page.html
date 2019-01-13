@@ -15,7 +15,7 @@
 </header>
 <div class="hackatons">
     {% for hackathon in hackathons %}
-        <article class="hackaton">
+        <a href="{% url 'hackathon:detail' id=hackathon.id %}"><article class="hackaton">
             <div class="hackaton-base">
                 <div>
                     <div class="hackaton-name">{{ hackathon.name }}</div>
@@ -23,7 +23,7 @@
                     <div class="hackaton-place">{{ hackathon.place }}</div>
                     {% if hackathon.place_url %}</a>{% endif %}
                 </div>
-                {% if hackathon.image %}<div class="hackaton-logo"><img src="{{ hackathon.image.url }}"></div>{% endif %}
+                {% if hackathon.image %}<div class="hackaton-logo   "><img src="{{ hackathon.image.url }}"></div>{% endif %}
             </div>
             <div class="hackaton-description">{{ hackathon.description }}</div>
             <a href="{% url 'hackathon:detail' id=hackathon.id %}">
@@ -44,7 +44,8 @@
             </a>
             {% endif %}
             </div>
-        </article>
+        </article></a>
+
     {% endfor %}
 </div>
 {% endblock content %}

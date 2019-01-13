@@ -67,7 +67,7 @@ class ParticipantCreate(CreateView):
             # print(self.object)
             return self.form_invalid(user_form)
             # participant.save()
-        return HttpResponse('success')  # super(ParticipantCreate, self).post(request)
+        return HttpResponseRedirect('/profile/')  # super(ParticipantCreate, self).post(request)
 
     # def form_valid(self, form):
     #     user = form.save()

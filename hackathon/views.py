@@ -36,6 +36,7 @@ class MainPage(ListView):
         context['counts'] = {1: 12, 2: 123}
         context['incomplete_count'] = 0
         context['complete_count'] = 0
+        context['res'] = self.get_queryset()
         return context
 
     def get_queryset(self):

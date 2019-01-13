@@ -54,6 +54,7 @@ class TeamCreate(LoginRequiredMixin, CreateView):
     form_class = TeamForm
 
     def form_valid(self, form):
+        print('valid')
         instance = form.save(commit=False)
         instance.teamleader = self.request.user.participant
         # participant = self.request.user.participant
@@ -61,8 +62,12 @@ class TeamCreate(LoginRequiredMixin, CreateView):
         # team = Team(name=data.get('name'), teamleader=participant, looking_for=data.get('looking_for'),
         #             needed_skill=data.get('needed_skill'), description=data.get('description'))
         # team.save()
+        instance.hackathon_id = self.request.GET.get('hackathon', 7)
         instance.save()
         instance.members.add(self.request.user.participant)
+        instance.save()
         return redirect(reverse('people:profile'))
+    def form_invalid(self, form):
+        print(form.errors)
 
 
