@@ -13,7 +13,7 @@
     <header class="header-main">
         Log in to your account!
     </header>
-    <form method="POST" class="register-form" action="{% url 'people:login  ' %}">
+    <form method="POST" class="register-form" action="{% url 'people:login' %}">
         {% csrf_token %}
 {#            {{ form.as_p }}#}
         <fieldset>
