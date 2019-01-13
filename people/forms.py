@@ -44,7 +44,7 @@ class ParticipantForm(ModelForm):
     # skills = forms.MultipleChoiceField(choices=ParticipantSkill.objects.values_list('id', flat=True))
     class Meta:
         model = Participant
-        fields = ['name',]# 'surname', 'city', 'description']
+        fields = () #['name',]# 'surname', 'city', 'description']
 
 
     def clean_name(self, value):
