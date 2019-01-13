@@ -17,28 +17,24 @@ class ParticipantCreate(CreateView):
     # template_name = 'tesst.html'
     
     def post(self, request):
+        self.object = None
         user_form = UserRegisterForm(request.POST)
-        city = City.objects.filter(name=request.POST['city']).first()
-        new_dict = {**request.POST, 'city':city.id}
-        skills_id = new_dict.get('skills')
-        profile_form = ParticipantForm(new_dict)
-        print(request.POST)
-        print(user_form.is_valid(), profile_form.is_valid())
-        print(profile_form.errors)
-        print(user_form.errors)
-        # print(request.POST)
+        city = City.objects.filter(name=request.POST['city']).first().id if City.objects.filter(name=request.POST['city']) else None
+        # new_dict = {**request.POST, 'city':city.id}
+        # print(new_dict['name'])
+        skills_id = request.POST.get('skills')
+        profile_form = ParticipantForm({"name":request.POST['name'], 'surname':request.POST['surname'], "city": city })
         if user_form.is_valid() and profile_form.is_valid():
             user = user_form.save()
             user.refresh_from_db()
-            self.object = user
             participant = profile_form.save(commit=False)
+            participant.user = user
             participant.save()
             participant.refresh_from_db()
-            participant.user = user
             for i in skills_id:
                 ParticipantSkill.objects.create(skill_id=i, participant=participant)
         else:
-            print(self.object)
+            # print(self.object)
             return self.form_invalid(user_form)
             # participant.save()
         return HttpResponse('success') # super(ParticipantCreate, self).post(request)
@@ -61,7 +57,10 @@ class ParticipantCreate(CreateView):
 class ParticipantCreateView(CreateView):
     form_class = ParticipantForm
     template_name = 'tesst.html'
-
+    
+    def post(self, request, *args, **kwargs):
+        print(request.POST)
+        return super(ParticipantCreateView, self).post(request, *args, **kwargs)
 
 class LoginView(auth_views.LoginView):
     template_name = 'peoples/login.html'

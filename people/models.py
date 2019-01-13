@@ -39,7 +39,7 @@ class ParticipantSkill(models.Model):
         return  self.skill.name
 
 class Participant(models.Model):
-    user        = models.OneToOneField(User, on_delete=models.CASCADE, blank=True)
+    user        = models.OneToOneField(User, on_delete=models.CASCADE, blank=True, null=True)
     name        = models.CharField(max_length=50)
     surname     = models.CharField(max_length=50)
     city        = models.ForeignKey(City, on_delete=models.SET_NULL, null=True, blank=True)
@@ -54,4 +54,5 @@ class Participant(models.Model):
 
 @receiver(post_delete, sender=Participant)
 def auto_delete_user(sender, instance, **kwargs):
-    instance.user.delete()
+    if instance.user:
+        instance.user.delete()
