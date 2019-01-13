@@ -1,0 +1,17 @@
+@import "base";
+
+@import "partials/menu";
+@import "partials/header";
+
+main {
+    flex-grow: 1;
+    background-color: $blue-dark;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+.message {
+    margin: 2em;
+    color: $gray;
+    font-size: 1.7rem;
+}
