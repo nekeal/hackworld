@@ -13,6 +13,7 @@
     <header class="header-main">
         Join us!
     </header>
+{#    {{ form.errors }}#}
     <form method="POST" class="register-form multiform" action="{% url 'people:user-register' %}">
         {% csrf_token %}
         <div class="step">

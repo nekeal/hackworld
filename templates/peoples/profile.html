@@ -1,13 +1,16 @@
 {% extends "base.html" %}
 {% block content %}
-{% for team in teams%}
+{% for team in teams.all %}
 
-<p>Team: {{ team }}}</p>
-{% for member in team.members %}
+{{participant.surname}}
 
-{% if member != participant %}}
-<p>Members: {{ member }}</p>
-{% endif %}}
+<p>Team: {{ team }}</p>
+    {% for member in team.members.all %}
+        {% if member != participant %}
+        <p>Member: {{ member }}</p>
+        {% endif %}
+
+    {% endfor %}
+
 {% endfor %}
-
-{% end block %}
+{% endblock %}

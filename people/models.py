@@ -32,19 +32,19 @@ class Skill(models.Model):
 
 class ParticipantSkill(models.Model):
     skill            = models.ForeignKey(Skill, on_delete=models.CASCADE)
-    advanced_level  = models. SmallIntegerField(validators=[advance_level_validator,])
+    advanced_level  = models. SmallIntegerField(validators=[advance_level_validator,], default=1)
+    participant     = models.ForeignKey('Participant', on_delete=models.CASCADE)
 
     def __str__(self):
         return  self.skill.name
 
 class Participant(models.Model):
-    user        = models.OneToOneField(User,on_delete=models.CASCADE, default=get_user)
+    user        = models.OneToOneField(User, on_delete=models.CASCADE, blank=True, null=True)
     name        = models.CharField(max_length=50)
     surname     = models.CharField(max_length=50)
     city        = models.ForeignKey(City, on_delete=models.SET_NULL, null=True, blank=True)
-    email       = models.EmailField()
-    skills      = models.ManyToManyField(ParticipantSkill, blank=True)
-
+    # email       = models.EmailField()
+    # skills      = models.ManyToManyField(ParticipantSkill, blank=True, related_name='participants')
 
     def __str__(self):
         return f"{self.name} {self.surname}"
@@ -54,4 +54,5 @@ class Participant(models.Model):
 
 @receiver(post_delete, sender=Participant)
 def auto_delete_user(sender, instance, **kwargs):
-    instance.user.delete()
+    if instance.user:
+        instance.user.delete()
