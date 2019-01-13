@@ -20,11 +20,13 @@ class UserRegisterForm(UserCreationForm):
         model = User
         fields = ['username', 'email', 'password1', 'password2']
 
-    def clean_short_description(self, value):
-        return value or self.instance.short_description
-
-    def clean_description(self, value):
-        return value or self.instance.description
+    # def clean_short_description(self):
+    #     short_description = self.cleaned_data['short_description']
+    #     return short_description or self.instance.participant.short_description
+    #
+    # def clean_description(self):
+    #     description = self.cleaned_data['description']
+    #     return description or self.instance.participant.description
 
 
 class UserUpdateForm(UserRegisterForm):
@@ -44,20 +46,24 @@ class ParticipantForm(ModelForm):
     # skills = forms.MultipleChoiceField(choices=ParticipantSkill.objects.values_list('id', flat=True))
     class Meta:
         model = Participant
-        fields = () #['name',]# 'surname', 'city', 'description']
+        fields = ['name', 'surname', 'city', 'description']
 
 
-    def clean_name(self, value):
-        return value or self.instance.name
+    def clean_name(self):
+        name = self.cleaned_data['name']
+        return name or self.instance.name
 
-    def clean_surname(self, value):
-        return value or self.instance.surname
+    def clean_surname(self):
+        surname = self.cleaned_data['surname']
+        return surname or self.instance.surname
 
     def clean_city(self):
-        return 0 or self.instance.city_id
+        city = self.cleaned_data['city']
+        return city.id or self.instance.city_id
 
-    def clean_description(self, value):
-        return value or self.instance.description
+    def clean_description(self):
+        description = self.cleaned_data['description']
+        return description or self.instance.description
 
 
 ParticipantSkillFormset = inlineformset_factory(Participant, ParticipantSkill, fields=['skill', 'advanced_level'],
