@@ -16,8 +16,6 @@ class TeamListView(ListView):
     template_name = 'teams/team-list.html'
 
 
-
-
 class TeamJoinRequestNotifier(View):
     def post(self, request):
         team_id = self.request.POST.get('team-id', self.request.GET.get('team-id'))
@@ -53,13 +51,18 @@ class TeamCreate(LoginRequiredMixin, CreateView):
     template_name = 'teams/team-create.html'
     form_class = TeamForm
 
+
+
     def form_valid(self, form):
-        participant = self.request.user.participant
-        data = self.request.POST.cleaned_data
-        team = Team(name=data.get('name'), teamleader=participant, looking_for=data.get('looking_for'),
-                    needed_skill=data.get('needed_skill'), description=data.get('description'))
-        team.save()
-        team.members.add(participant)
+        instance = form.save(commit=False)
+        instance.teamleader = self.request.user.participant
+        # participant = self.request.user.participant
+        # data = self.request.POST.cleaned_data
+        # team = Team(name=data.get('name'), teamleader=participant, looking_for=data.get('looking_for'),
+        #             needed_skill=data.get('needed_skill'), description=data.get('description'))
+        # team.save()
+        instance.save()
+        instance.members.add(self.request.user.participant)
         return redirect(reverse('people:profile'))
 
 

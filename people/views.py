@@ -2,8 +2,11 @@ from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, FormView
 from django.views.generic import DetailView
 from django.views.generic.base import TemplateView
+from django.db.models import Q
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import reverse
+from django.views.generic import ListView
+from teams.models import Team
 from .forms import UserRegisterForm, ParticipantForm
 from .models import Participant, City, ParticipantSkill
 from django.contrib.auth import views as auth_views
@@ -11,6 +14,15 @@ from .forms import ParticipantForm, ParticipantSkillFormset, UserUpdateForm, Use
 from django.contrib.auth import logout, login, authenticate
 from django.contrib.auth.mixins import LoginRequiredMixin
 
+
+
+
+class TeamListView(ListView):
+    template_name ='peoples/team_list.html'
+
+    def get_queryset(self):
+        qs = Team.objects.filter(Q(members__id=self.request.user.participant.id) | Q(teamleader=self.request.user.participant)).distinct()
+        return qs
 
 class DescriptionUpdateView(UpdateView):
     template_name = ''
