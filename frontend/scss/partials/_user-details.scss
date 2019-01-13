@@ -52,10 +52,16 @@
             margin-bottom: 0.3em;
             display: flex;
             align-items: center;
+
+            @media(max-width: $breakpoint-medium) {
+                margin-bottom: 1.2em;
+                flex-direction: column;
+                justify-content: center;
+            }
         }
 
         .user-skill-remove {
-            opacity: 0.5;
+            opacity: 0.3;
         }
 
         .name {

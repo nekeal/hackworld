@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% load staticfiles %}
+{% load widget_tweaks %}
+
+{% block title %}Profil{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/user.css' %}">
+{% endblock %}
+
+{% block content %}
+    <header class="header-main">
+        <div>
+            <div class="header-text">{{ participant.name }} {{ participant.surname }}</div>
+            <div class="header-subtext">Student AGH I roku, informatyka</div>
+        </div>
+        <div class="header-image"><img src="{% static '/img/avatar.jpg' %}"></div>
+    </header>
+    <div class="user-details" data-id="{{ participant.id }}">
+        <div class="user-description">
+            <div class="header">Description</div>
+            <div class="description">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius perspiciatis nemo, sapiente neque obcaecati voluptatibus recusandae quas sunt eligendi nihil optio delectus suscipit aliquid repellat, molestias veniam voluptate sit itaque.
+            </div>
+        </div>
+        <div class="user-skills">
+            <div class="header">Skills</div>
+            <div class="user-skills-list block">
+                {% for skill in participant.participantskill_set.all %}
+                    <div class="user-skill">
+                        <div class="name">{{ skill.skill.name }}</div>
+                        <div class="c-rating c-rating--big">
+                            <button>1</button>
+                            <button>2</button>
+                            <button>3</button>
+                            <button>4</button>
+                            <button>5</button>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="button" id="skills-send">Save</div>
+        </div>
+    </div>
+{% endblock content %}
+
+{% block scripts %}
+{% endblock scripts %}

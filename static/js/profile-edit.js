@@ -35,7 +35,7 @@ $("#skills-send").click(() => {
     const total = $(".user-skill").length, initial = total - $(".user-skill-new").length;
 
     data[prefix + "TOTAL_FORMS"] = total;
-    data[prefix + "INITIAL_FORM"] = initial;
+    data[prefix + "INITIAL_FORMS"] = initial;
     data[prefix + "MIN_NUM_FORMS"] = 0;
     data[prefix + "MAX_NUM_FORMS"] = 1000;
 
@@ -56,11 +56,9 @@ $("#skills-send").click(() => {
 
     $.post("/profile/skills/", data)
     .done(data => {
-        console.log(data);
+        location.reload();
     }) 
 
-
-    console.log(data);
 });
 
 function setStarsHandler(e) {
@@ -94,5 +92,5 @@ $(".user-skills .add").click((e) => {
 })
 
 $(".user-skills .remove").click((e) => {
-    $(e.currentTarget).parent().addClass("user-skills-remove")
+    $(e.currentTarget).parent().addClass("user-skill-remove")
 })
