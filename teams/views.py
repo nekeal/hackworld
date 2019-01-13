@@ -114,12 +114,12 @@ class TeamUpdateView(FormView):
         context['members'] = Team.objects.get(pk=id)
         return context
 
-    def get_form(self, form_class=None):
-        id = self.kwargs['pk']
-        team = Team.objects.get(pk=id)
-        form = self.form_class(
-            initial={'description': team.description,
-                     'looking_for': team.looking_for,
-                     'needed_skill': team.needed_skill.all()
-                     })
-        return form
+    # def get_form(self, form_class=None):
+    #     id = self.kwargs['pk']
+    #     team = Team.objects.get(pk=id)
+    #     form = self.form_class(
+    #         initial={'description': team.description,
+    #                  'looking_for': team.looking_for,
+    #                  'needed_skill': team.needed_skill.all()
+    #                  })
+    #     return form

@@ -1,4 +1,5 @@
-hasattr() .models import Team
+
+from .models import Team
 from django import forms
 from .models import Team, Participant, Skill
 
@@ -11,7 +12,7 @@ class TeamForm(forms.ModelForm):
 
 class TeamUpdateForm(forms.ModelForm):
     description = forms.Textarea()
-    looking_for = forms.BooleanField()
+    looking_for = forms.BooleanField(required=False)
     needed_skill = forms.ModelMultipleChoiceField(Skill.objects.all())
 
     class Meta:
