@@ -169,4 +169,4 @@ class Participantformset(UpdateView):
             return self.render_to_response(self.get_context_data(form=form))
 
     def get_object(self, queryset=None):
-        return Participant.objects.first()
+        return self.request.user.participant

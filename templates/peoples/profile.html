@@ -36,9 +36,10 @@
         <div class="user-skills">
             <div class="header">Skills <span id="skills-edit"><img src="{% static 'img/icons8-edit-filled-50.png' %}"></span></div>
             <div class="user-skills-list block">
-                <div class="user-skill">
-                    <div class="name">Scrum mastering</div>
-                    <div class="c-rating c-rating--big" data-rating-value="5">
+                {% for skill in participant.participantskill_set.all %}
+                 <div class="user-skill" data-id="{{ skill.id }}">
+                    <div class="name" data-id="{{ skill.skill.id }}">{{ skill.skill.name }}</div>
+                    <div class="c-rating c-rating--big" data-rating-value="{{ skill.advanced_level }}">
                         <button>1</button>
                         <button>2</button>
                         <button>3</button>
@@ -46,26 +47,28 @@
                         <button>5</button>
                     </div>
                 </div>
-                <div class="user-skill">
-                    <div class="name">Wordpress development</div>
-                    <div class="c-rating c-rating--big" data-rating-value="3">
-                        <button>1</button>
-                        <button>2</button>
-                        <button>3</button>
-                        <button>4</button>
-                        <button>5</button>
-                    </div>
-                </div>
-                <div class="user-skill">
-                    <div class="name">Javascript</div>
-                    <div class="c-rating c-rating--big" data-rating-value="2">
-                        <button>1</button>
-                        <button>2</button>
-                        <button>3</button>
-                        <button>4</button>
-                        <button>5</button>
-                    </div>
-                </div>
+                {% endfor %}
+{##}
+{#                <div class="user-skill">#}
+{#                    <div class="name">Wordpress development</div>#}
+{#                    <div class="c-rating c-rating--big" data-rating-value="3">#}
+{#                        <button>1</button>#}
+{#                        <button>2</button>#}
+{#                        <button>3</button>#}
+{#                        <button>4</button>#}
+{#                        <button>5</button>#}
+{#                    </div>#}
+{#                </div>#}
+{#                <div class="user-skill">#}
+{#                    <div class="name">Javascript</div>#}
+{#                    <div class="c-rating c-rating--big" data-rating-value="2">#}
+{#                        <button>1</button>#}
+{#                        <button>2</button>#}
+{#                        <button>3</button>#}
+{#                        <button>4</button>#}
+{#                        <button>5</button>#}
+{#                    </div>#}
+{#                </div>#}
             </div>
             <div class="button">Save</div>
         </div>
