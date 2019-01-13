@@ -44,6 +44,9 @@ class Participant(models.Model):
     surname             = models.CharField(max_length=50)
     city                = models.ForeignKey(City, on_delete=models.SET_NULL, null=True, blank=True)
     short_description   = models.CharField(max_length=100, blank=True)
+    description         = models.TextField(blank=True)
+    linkedin_url        = models.URLField(blank=True)
+    github_url          = models.URLField(blank=True)
     # email       = models.EmailField()
     # skills      = models.ManyToManyField(ParticipantSkill, blank=True, related_name='participants')
 
