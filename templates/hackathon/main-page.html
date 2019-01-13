@@ -16,15 +16,21 @@
 <div class="hackatons">
     {% for hackathon in hackathons %}
     <article class="hackaton">
+        {% if hackathon.place_url %}
         <a href="{{ hackathon.place_url }}">
+        {% endif %}
             <div class="hackaton-base">
                 <div>
                     <div class="hackaton-name">{{ hackathon.name }}</div>
                     <div class="hackaton-place">{{ hackathon.place }}</div>
                 </div>
-                <div class="hackaton-logo"><img src="{% static 'img/bitehack.png' %}"></div>
+                {% if hackathon.image %}
+                <div class="hackaton-logo"><img src="{{ hackathon.image.url }}"></div>
+                {% endif %}
             </div>
+        {% if hackathon.place_url %}
         </a>
+        {% endif %}
         <div class="hackaton-description">{{ hackathon.description }}
         </div>
         <div class="hackaton-teams">
