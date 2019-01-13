@@ -37,12 +37,15 @@ class MainPage(ListView):
         return context
 
     def get_queryset(self):
-        res = Hackathon.objects.filter(accepted=True).values('id', 'name', 'official_website', 'place_url', 'place',
-                                                             'description', 'max_size')
+        res = list(
+            Hackathon.objects.filter(accepted=True).values('id', 'name', 'official_website', 'place_url', 'place',
+                                                           'description', 'max_size'))
+        print(type(res))
+        print(res)
         for hack in res:
             hack['complete_c'] = 0
             hack['incomplete_c'] = 0
-            for team in Team.objects.filter(hackathon__id=hack.id):
+            for team in Team.objects.filter(hackathon__id=hack['id']):
                 if team.members.count() >= hack['max_size']:
                     hack['complete_c'] += 1
                 else:

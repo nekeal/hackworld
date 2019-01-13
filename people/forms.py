@@ -20,6 +20,10 @@ class UserRegisterForm(UserCreationForm):
         model = User
         fields = ['username', 'email', 'password1', 'password2']
 
+
+class UserSimpleUpdateForm(Form):
+    email = forms.EmailField(required=True)
+
     # def clean_short_description(self):
     #     short_description = self.cleaned_data['short_description']
     #     return short_description or self.instance.participant.short_description
@@ -42,10 +46,10 @@ class UserRegisterForm(UserCreationForm):
 #         fields = ['email']
 
 class UserUpdateForm(Form):
-    city = forms.CharField(required=False)
-    email = forms.EmailField(required=False)
-    name = forms.CharField(required=False)
-    surname = forms.CharField(required=False)
+    city = forms.CharField(required=True)
+    email = forms.EmailField(required=True)
+    name = forms.CharField(required=True)
+    surname = forms.CharField(required=True)
     short_description = forms.CharField(required=False)
 
 class ParticipantForm(ModelForm):
