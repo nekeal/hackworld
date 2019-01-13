@@ -22,7 +22,8 @@
         <div class="user-description">
             <div class="header">Description</div>
             <div class="description">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius perspiciatis nemo, sapiente neque obcaecati voluptatibus recusandae quas sunt eligendi nihil optio delectus suscipit aliquid repellat, molestias veniam voluptate sit itaque.
+                {{ participant.description }}<br>
+
             </div>
         </div>
         <div class="user-skills">
@@ -31,7 +32,7 @@
                 {% for skill in participant.participantskill_set.all %}
                     <div class="user-skill">
                         <div class="name">{{ skill.skill.name }}</div>
-                        <div class="c-rating c-rating--big">
+                        <div class="c-rating c-rating--big" data-rating-value="{{ skill.advanced_level }}">
                             <button>1</button>
                             <button>2</button>
                             <button>3</button>

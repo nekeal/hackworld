@@ -3,7 +3,7 @@ from django.core.validators import ValidationError
 from django.contrib.auth.models import User
 from django.db.models.signals import post_delete
 from django.dispatch import receiver
-
+from django.shortcuts import reverse
 # Create your models here.
 
 def advance_level_validator(value):
@@ -52,6 +52,9 @@ class Participant(models.Model):
 
     def __str__(self):
         return f"{self.name} {self.surname}"
+
+    def get_absolute_url(self):
+        return reverse('people:alien-profile', args=(self.id,))
 
 
 

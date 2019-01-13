@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, FormView
+from django.views.generic import DetailView
 from django.views.generic.base import TemplateView
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import reverse
@@ -108,6 +109,18 @@ class ProfileView(LoginRequiredMixin, TemplateView):
         context['participant'] = participant
         # context['form'] = DescriptionUpdateForm()
         return context
+
+class AlienProfileView(DetailView):
+    template_name = 'peoples/alien_profile.html'
+    queryset = Participant.objects.all()
+    model = Participant
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     participant = Participant.objects.get(user=self.request.user)
+    #     context['teams'] = participant.team_set.all()
+    #     context['participant'] = participant
+    #     # context['form'] = DescriptionUpdateForm()
+    #     return context
 
 
 class ParticipantUpdateView(FormView):

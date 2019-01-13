@@ -1,5 +1,5 @@
 from django.db import models
-from people.models import Participant
+from people.models import Participant, Skill
 from hackathon.models import Hackathon
 # Create your models here.
 
@@ -11,3 +11,7 @@ class Team(models.Model):
     looking_for = models.BooleanField()
     hackathon   = models.ForeignKey(Hackathon, on_delete=models.CASCADE)
     candidates  = models.ManyToManyField(Participant, blank=True)
+    needed_skill = models.ManyToManyField(Skill,blank=True)
+
+    def __str__(self):
+        return self.name
