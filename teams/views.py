@@ -19,7 +19,7 @@ from django.db.models import Q
 
 class AddDeleteCandidate(View):
     def post(self, request):
-        data = json.dumps(request.POST)
+        data = request.POST.dict()
         team = Team.objects.get(id=data['team-id'])
         participant = Participant.objects.get(id=data['user-id'])
         if data['accept']:
