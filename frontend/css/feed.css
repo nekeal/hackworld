@@ -286,6 +286,12 @@ body {
   color: #D1D1D1;
 }
 
+@media (max-width: 1100px) {
+  .hackaton {
+    max-width: 90vw;
+  }
+}
+
 .hackaton .hackaton-base {
   display: -webkit-box;
   display: -ms-flexbox;
