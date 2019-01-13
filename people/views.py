@@ -92,13 +92,16 @@ class ProfileView(LoginRequiredMixin, TemplateView):
         return context
 
 class ParticipantUpdateView(UpdateView):
-    form_class = UserRegisterForm
+    form_class = UserUpdateForm
     template_name = 'peoples/edit-profile.html'
 
-    def get_context_data(self, **kwargs):
-        context = super(ParticipantUpdateView, self).get_context_data(**kwargs)
-        context['form'] = UserUpdateForm(instance=self.request.user)
-        return context
+    # def get_context_data(self, **kwargs):
+    #     context = super(ParticipantUpdateView, self).get_context_data(**kwargs)
+    #     context['form'] = self.get_form(self.form_class)
+    #     return context
+
+    def get_form(self, form_class=None):
+        return self.form_class(initial={'name': self.request.user.participant.name})
 
     def post(self, request):
         self.object = None
