@@ -141,3 +141,32 @@ class ParticipantUpdateView(UpdateView):
                            user=user)
         part.save()
         return redirect('../admin/')
+
+
+class Participantformset(UpdateView):
+    model = Participant
+    success_url='/profile/'
+    template_name = 'tesst.html'
+    form_class = ParticipantForm
+    def get_context_data(self, **kwargs):
+        context = super(ParticipantUpdateView, self).get_context_data(**kwargs)
+        if self.request.POST:
+            context['skill_formset'] = ParticipantSkillFormset(self.request.POST, instance=self.object)
+            context['skill_formset'].full_clean()
+        else:
+            context['skill_formset'] = ParticipantSkillFormset(instance=self.object)
+        return context
+
+    def form_valid(self, form):
+        context = self.get_context_data()
+        formset = context['skill_formset']
+        if formset.is_valid():
+            self.object = form.save()
+            formset.instance = self.object
+            formset.save()
+            return redirect(self.success_url)
+        else:
+            return self.render_to_response(self.get_context_data(form=form))
+
+    def get_object(self, queryset=None):
+        return Participant.objects.first()
