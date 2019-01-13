@@ -26,11 +26,12 @@
         <div class="user-description">
             <div class="header">Description <span id="description-edit"><img src="{% static 'img/icons8-edit-filled-50.png' %}"></span></div>
             <div class="description">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius perspiciatis nemo, sapiente neque obcaecati voluptatibus recusandae quas sunt eligendi nihil optio delectus suscipit aliquid repellat, molestias veniam voluptate sit itaque.
+                    {{ participant.description }}
             </div>
             {% comment %} SET FORM ACTION {% endcomment %}
-            <form action="#">
+            <form method="POST" action="{% url 'people:description' %}">
                 <textarea name="description" id="description"></textarea>
+                    {{ form.description|attr:"id=description" }}
                 <input type="submit" class="button" value="Save">
             </form>
         </div>

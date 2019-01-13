@@ -1,15 +1,30 @@
 from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, FormView
 from django.views.generic.base import TemplateView
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import reverse
 from .forms import UserRegisterForm, ParticipantForm
 from .models import Participant, City, ParticipantSkill
 from django.contrib.auth import views as auth_views
-from .forms import ParticipantForm, ParticipantSkillFormset, UserUpdateForm, UserSimpleUpdateForm
+from .forms import ParticipantForm, ParticipantSkillFormset, UserUpdateForm, UserSimpleUpdateForm, DescriptionUpdateForm
 from django.contrib.auth import logout, login, authenticate
 from django.contrib.auth.mixins import LoginRequiredMixin
 
+
+class DescriptionUpdateView(UpdateView):
+    template_name = ''
+    form_class = DescriptionUpdateForm
+    success_url = '/profile/'
+
+    def get_object(self, queryset=None):
+        return self.request.user.participant
+        #
+        # def form_valid(self, form):
+        #     print(form.cleaned_data)
+        #     o = form.save(commit=False)
+        #     o.description = form.cleaned_data['description']
+        #     o.save()
+        #     return HttpResponseRedirect('/profile/')
 
 class ParticipantCreate(CreateView):
     form_class = UserRegisterForm
@@ -91,6 +106,7 @@ class ProfileView(LoginRequiredMixin, TemplateView):
         participant = Participant.objects.get(user=self.request.user)
         context['teams'] = participant.team_set.all()
         context['participant'] = participant
+        # context['form'] = DescriptionUpdateForm()
         return context
 
 
@@ -142,16 +158,21 @@ class ParticipantUpdateView(FormView):
         # print(new_dict['name'])
         # skills_id = request.POST.get('skills')
         # profile_form = ParticipantForm({"name": request.POST['name'], 'surname': request.POST['surname'], "city": city}, instance=request.user.participant)
-        profile_form = UserSimpleUpdateForm(request.POST)
+        # print(request.POST)
+        profile_form = UserUpdateForm(request.POST)
         # print(user_form.is_valid(), profile_form.is_valid())
         print(profile_form.errors)
         if profile_form.is_valid():
             user = request.user
-            user.email = request.POST['email'] or user.email
+            profile_form.cleaned_data.update({'city': city.id})
+            print(profile_form.cleaned_data)
+            email = profile_form.cleaned_data.pop('email')
+            user.email = email
             user.save()
             # user.refresh_from_db()
             # participant = profile_form.save(commit=True)
-            participant = Participant.objects.create(**profile_form.cleaned_data)
+
+            participant = Participant.objects.filter(user=request.user).update(**profile_form.cleaned_data)
             # participant.user = user
             # participant.save()
             # participant.refresh_from_db()
@@ -161,7 +182,7 @@ class ParticipantUpdateView(FormView):
             # print(self.object)
             return self.form_invalid(profile_form)
             # participant.save()
-        return HttpResponse('success')  # super(ParticipantCreate, self).post(request)
+        return HttpResponseRedirect(reverse('people:profile'))  # super(ParticipantCreate, self).post(request)
     #
     # def get_object(self, queryset=None):
     #     return self.request.user# Participant.objects.get(user=self.request.user)
@@ -191,6 +212,8 @@ class Participantformset(UpdateView):
         if self.request.POST:
             context['skill_formset'] = ParticipantSkillFormset(self.request.POST, instance=self.object)
             context['skill_formset'].full_clean()
+            print(context['skill_formset'].errors)
+            print(context['form'].errors)
         else:
             context['skill_formset'] = ParticipantSkillFormset(instance=self.object)
         return context
@@ -206,6 +229,7 @@ class Participantformset(UpdateView):
         else:
             return self.render_to_response(self.get_context_data(form=form))
 
+
     def get_object(self, queryset=None):
-        # return self.request.user.participant
-        return Participant.objects.get(user__username='admin')
+        return self.request.user.participant
+        # return Participant.objects.get(user__username='admin')

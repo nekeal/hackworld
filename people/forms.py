@@ -52,11 +52,22 @@ class UserUpdateForm(Form):
     surname = forms.CharField(required=True)
     short_description = forms.CharField(required=False)
 
-class ParticipantForm(ModelForm):
-    # skills = forms.MultipleChoiceField(choices=ParticipantSkill.objects.values_list('id', flat=True))
+class DescriptionUpdateForm(ModelForm):
+    description = forms.CharField(widget=TextInput)
+
     class Meta:
         model = Participant
-        fields = ['name', 'surname', 'city', 'description']
+        fields = ('description',)
+
+class ParticipantForm(ModelForm):
+    # skills = forms.MultipleChoiceField(choices=ParticipantSkill.objects.values_list('id', flat=True))
+    name = forms.CharField(required=False)
+    surname = forms.CharField(required=False)
+    description = forms.CharField(required=False)
+
+    class Meta:
+        model = Participant
+        fields = ['name', 'surname', 'description']
 
 
     def clean_name(self):
@@ -67,9 +78,11 @@ class ParticipantForm(ModelForm):
         surname = self.cleaned_data['surname']
         return surname or self.instance.surname
 
-    def clean_city(self):
-        city = self.cleaned_data['city']
-        return city.id or self.instance.city_id
+    # def clean_city(self):
+    #     city = self.cleaned_data['city']
+    #     if self.instance.city:
+    #         return self.instance.city
+    #     return None
 
     def clean_description(self):
         description = self.cleaned_data['description']
