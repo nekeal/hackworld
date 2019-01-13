@@ -40,3 +40,5 @@ class TeamJoinRequestNotifier(View):
         if res:
             return JsonResponse({'success': True, 'message': 'Mail sent'})
         return JsonResponse({'success': False, 'message': f'Added to candidates but could not send mail to {team.teamleader.user.email}'})
+
+
