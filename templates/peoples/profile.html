@@ -1,5 +1,82 @@
 {% extends "base.html" %}
+
+{% load static %}
+{% load staticfiles %}
+{% load widget_tweaks %}
+
+{% block title %}Profil{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/user.css' %}">
+{% endblock %}
+
 {% block content %}
+    <header class="header-main">
+        <div>
+            <div class="header-text">{{ participant.name }} {{ participant.surname }}</div>
+            <div class="header-subtext">Student AGH I roku, informatyka</div>
+        </div>
+        <div class="header-image"><img src="../img/avatar.jpg"></div>
+    </header>
+    <div class="user-details">
+        <div class="user-edit">
+            <a href="#"><div class="button">Edit personal data</div></a>
+        </div>
+        <div class="user-description">
+            <div class="header">Description <span id="description-edit"><img src="{% static 'img/icons8-edit-filled-50.png' %}"></span></div>
+            <div class="description">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius perspiciatis nemo, sapiente neque obcaecati voluptatibus recusandae quas sunt eligendi nihil optio delectus suscipit aliquid repellat, molestias veniam voluptate sit itaque.
+            </div>
+            {% comment %} SET FORM ACTION {% endcomment %}
+            <form action="#">
+                <textarea name="description" id="description"></textarea>
+                <input type="submit" class="button" value="Save">
+            </form>
+        </div>
+        <div class="user-skills">
+            <div class="header">Skills <span id="skills-edit"><img src="{% static 'img/icons8-edit-filled-50.png' %}"></span></div>
+            <div class="user-skills-list block">
+                <div class="user-skill">
+                    <div class="name">Scrum mastering</div>
+                    <div class="c-rating c-rating--big" data-rating-value="5">
+                        <button>1</button>
+                        <button>2</button>
+                        <button>3</button>
+                        <button>4</button>
+                        <button>5</button>
+                    </div>
+                </div>
+                <div class="user-skill">
+                    <div class="name">Wordpress development</div>
+                    <div class="c-rating c-rating--big" data-rating-value="3">
+                        <button>1</button>
+                        <button>2</button>
+                        <button>3</button>
+                        <button>4</button>
+                        <button>5</button>
+                    </div>
+                </div>
+                <div class="user-skill">
+                    <div class="name">Javascript</div>
+                    <div class="c-rating c-rating--big" data-rating-value="2">
+                        <button>1</button>
+                        <button>2</button>
+                        <button>3</button>
+                        <button>4</button>
+                        <button>5</button>
+                    </div>
+                </div>
+            </div>
+            <div class="button">Save</div>
+        </div>
+    </div>
+{% endblock content %}
+
+{% block scripts %}
+    <script src="{% static 'js/profile-edit.js' %}"></script>
+{% endblock scripts %}
+
+{% comment %} {% block content %}
 {% for team in teams.all %}
 
 {{participant.surname}}
@@ -13,4 +90,4 @@
     {% endfor %}
 
 {% endfor %}
-{% endblock %}
+{% endblock %} {% endcomment %}
