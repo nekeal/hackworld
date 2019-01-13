@@ -54,7 +54,7 @@ class MainPage(ListView):
         return res
 
 
-class HackathonDetailView(ListView):
+class HackathonDetailView(LoginRequiredMixin, ListView):
     # model = Team
     template_name = 'hackathon/hackathon_team_list.html'
 
@@ -66,7 +66,7 @@ class HackathonDetailView(ListView):
             context['my_skills'] = list(self.request.user.participant.participantskill_set.values_list('skill__id',flat=True))
             print(context['my_skills'])
             context['my_team'] = Team.objects.filter(hackathon__id=self.kwargs['id']).filter(Q(members=self.request.user.participant) | Q(teamleader=self.request.user.participant)).distinct()
-            context['queryset'] = self.get_queryset().exclude(name=Team.objects.filter(hackathon__id=self.kwargs['id']).filter(Q(members=self.request.user.participant) | Q(teamleader=self.request.user.participant)).distinct()[0].name)
+        context['queryset'] = self.get_queryset().exclude(name=Team.objects.filter(hackathon__id=self.kwargs['id']).filter(Q(members=self.request.user.participant) | Q(teamleader=self.request.user.participant)).distinct()[0].name)
         return context
 
     def get_queryset(self):

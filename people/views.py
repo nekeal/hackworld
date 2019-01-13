@@ -50,8 +50,6 @@ class ParticipantCreate(CreateView):
         user_form = UserRegisterForm(request.POST)
         city = City.objects.filter(name=request.POST['city']).first().id if City.objects.filter(
             name=request.POST['city']) else None
-        # new_dict = {**request.POST, 'city':city.id}
-        # print(new_dict['name'])
         skills_id = request.POST.get('skills')
         profile_form = ParticipantForm({"name": request.POST['name'], 'surname': request.POST['surname'], "city": city})
         if user_form.is_valid() and profile_form.is_valid():
@@ -61,6 +59,7 @@ class ParticipantCreate(CreateView):
             participant.user = user
             participant.save()
             participant.refresh_from_db()
+            print(participant)
             for i in skills_id:
                 ParticipantSkill.objects.create(skill_id=i, participant=participant)
         else:
@@ -151,29 +150,6 @@ class ParticipantUpdateView(FormView):
                      'city': self.request.user.participant.city,
                      'short_description': self.request.user.participant.short_description,
                      'email': self.request.user.email})
-    #
-    # def post(self, request):
-    #     user_form = UserRegisterForm(request.POST)
-    #     city = City.objects.filter(name=request.POST['city']).first().id if City.objects.filter(
-    #         name=request.POST['city']) else None
-    #     # new_dict = {**request.POST, 'city':city.id}
-    #     # print(new_dict['name'])
-    #     skills_id = request.POST.get('skills')
-    #     profile_form = ParticipantForm({"name": request.POST['name'], 'surname': request.POST['surname'], "city": city})
-    #     if user_form.is_valid() and profile_form.is_valid():
-    #         user = user_form.save()
-    #         user.refresh_from_db()
-    #         participant = profile_form.save(commit=False)
-    #         participant.user = user
-    #         participant.save()
-    #         participant.refresh_from_db()
-    #         for i in skills_id:
-    #             ParticipantSkill.objects.create(skill_id=i, participant=participant)
-    #     else:
-    #         # print(self.object)
-    #         return self.form_invalid(user_form)
-    #         # participant.save()
-    #     return HttpResponse('success')  # super(ParticipantCreate, self).post(request)
 
     def post(self, request):
         # user_form = UserSimpleUpdateForm(request.POST)
