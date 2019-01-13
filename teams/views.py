@@ -98,6 +98,7 @@ class TeamUpdateView(FormView):
     form_class = TeamUpdateForm
     template_name = 'peoples/edit-team.html'
     queryset = Participant.objects.all()
+    success_url = reverse("people:teams-list")
     model = Team
 
     def dispatch(self, request, *args, **kwargs):
