@@ -33,6 +33,10 @@ class AddDeleteCandidate(View):
             team.candidates.remove(participant)
             return {"success": True, 'message': f'{participant.name} {participant.surname} removed from candidates!'}
 
+class JoinRequest(View):
+    def post(self, request):
+        data = request.POST
+
 
 class TeamListView(ListView):
     model = Team
