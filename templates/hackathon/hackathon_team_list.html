@@ -27,15 +27,17 @@
                     Create team
                 </div>
             </a>
-            {% endif %}
-
-            <!-- when user has team - clicking takes to editing page -->
-            <a href="#">
+                {% else %}
+                 <a href="#">
                 <div class="your-team">{{ my_team.first.name }}
                     <img src="{% static 'img/icons8-edit-filled-50.png' %}">
 
                 </div>
             </a>
+            {% endif %}
+
+            <!-- when user has team - clicking takes to editing page -->
+
             <div class="hackaton-teams-featured">
                 <div class="hackaton-teams-header">
                     Teams searching for people
