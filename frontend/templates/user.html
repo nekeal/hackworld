@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../css/user.css">
+    <title>Home</title>
+</head>
+<body>
+    <div class="container">
+        <aside class="menu-wrapper">
+            <div class="menu-container">
+                <div class="menu-header">
+                    <div></div>
+                    <div class="menu-logo">
+                        HackWorld
+                    </div> 
+                    <div class="menu-hamburger">
+                        <div class="bar1"></div>
+                        <div class="bar2"></div>
+                        <div class="bar3"></div>
+                    </div>
+                </div>
+                <div class="menu-option"><a href="#">Log in</a></div>
+                <div class="menu-option"><a href="#">Register</a></div>
+                <div class="menu-option">Your hackatons</div>
+                <div class="menu-events">
+                    <div class="menu-event">
+                        <div class="event-date">12.01.2019 (in 5 days)</div>
+                        <div class="event-name">BITEhack <img src="../img/bitehack.png"></div>
+                        <div class="event-team">
+                            Your team
+                            <div class="team-member">Kamil Krzempek</div>
+                            <div class="team-member">Szymon Cader</div>
+                            <div class="team-member">Grzegorz Nieużyła</div>
+                        </div>
+                    </div>
+                    <div class="menu-event">
+                        <div class="event-date">06.04.2019 (in 63 days)</div>
+                        <div class="event-name">Hacknarok <img src="../img/hacknarok.gif"></div>
+                        <div class="event-team">
+                            Your team
+                            <div class="team-member">Paweł Tomana</div>
+                            <div class="team-member">Dawid Weiss</div>
+                            <div class="team-member">Adrian Debeściak</div>
+                            <div class="team-member">Maciek Sikora</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+        <main class="profile-edit">
+            <header class="header-main">
+                <div>
+                    <div class="header-text">Kamil Krzempek</div>
+                    <div class="header-subtext">Student AGH I roku, informatyka</div>
+                </div>
+                <div class="header-image"><img src="../img/avatar.jpg"></div>
+            </header>
+            <div class="user-details">
+                <div class="user-edit">
+                    <a href="#"><div class="button">Edit personal data</div></a>
+                </div>
+                <div class="user-description">
+                    <div class="header">Description <span id="description-edit"><img src="../img/icons8-edit-filled-50.png"></span></div>
+                    <div class="description">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius perspiciatis nemo, sapiente neque obcaecati voluptatibus recusandae quas sunt eligendi nihil optio delectus suscipit aliquid repellat, molestias veniam voluptate sit itaque.
+                    </div>
+                    <form action="#">
+                        <textarea name="description" id="description"></textarea>
+                        <input type="submit" class="button" value="Save">
+                    </form>
+                </div>
+                <div class="user-skills">
+                    <div class="header">Skills <span id="skills-edit"><img src="../img/icons8-edit-filled-50.png"></span></div>
+                    <div class="user-skills-list block">
+                        <div class="user-skill">
+                            <div class="name">Scrum mastering</div>
+                            <div class="c-rating c-rating--big" data-rating-value="5">
+                                <button>1</button>
+                                <button>2</button>
+                                <button>3</button>
+                                <button>4</button>
+                                <button>5</button>
+                            </div>
+                        </div>
+                        <div class="user-skill">
+                            <div class="name">Wordpress development</div>
+                            <div class="c-rating c-rating--big" data-rating-value="3">
+                                <button>1</button>
+                                <button>2</button>
+                                <button>3</button>
+                                <button>4</button>
+                                <button>5</button>
+                            </div>
+                        </div>
+                        <div class="user-skill">
+                            <div class="name">Javascript</div>
+                            <div class="c-rating c-rating--big" data-rating-value="2">
+                                <button>1</button>
+                                <button>2</button>
+                                <button>3</button>
+                                <button>4</button>
+                                <button>5</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="button">Save</div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="../js/menu.js"></script>
+    <script src="../js/profile-edit.js"></script>
+</body>
+</html>

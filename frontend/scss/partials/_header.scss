@@ -1,9 +1,29 @@
 .header-main {
     font-family: $font-primary;
     font-size: 3rem;
-    padding: 0.85em 1em;
+    padding: 0.8em 1em;
     color: $gray;
     background-color: darken($blue-dark, 5%);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+}
+
+.header-text {
+
+}
+
+.header-subtext {
+    padding-top: 0.5em;
+    font-size: 1.5rem;
+    color: darken($gray, 15%);
+}
+
+.header-image {
+    img {
+        width: 3em;
+    }
 }
 
 // .header-links {

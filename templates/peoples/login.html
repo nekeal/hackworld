@@ -25,7 +25,7 @@
         <fieldset>
             <label for="password">Password</label>
             <div class="errortext">{{ form.password.errors }}</div>
-            <input class="regular-input" type="password" id="password" name="password">
+            {% comment %} <input class="regular-input" type="password" id="password" name="password"> {% endcomment %}
             {{ form.password|attr:'class=regular-input'|attr:'id=passsword' }}
         </fieldset>
         <div class="buttons">

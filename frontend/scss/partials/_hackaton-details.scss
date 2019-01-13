@@ -1,0 +1,135 @@
+.hackaton-details {
+    margin: 3em 3em 0 3em;
+
+    .hackaton-teams {
+        
+    }
+
+    .add-team, .your-team {
+        // width: 8em;
+        text-align: center;
+        color: $gray;
+        font-size: 2rem;
+        font-family: $font-primary;
+        padding: 0.3em 0.5em;
+        background-color: darken($blue-dark, 5%);
+        border-radius: 1em;
+        display: inline-flex;
+        align-items: center;
+        justify-content: space-evenly; 
+
+        img {
+            margin-right: 0.4em;
+        }
+    }
+    
+    .hackaton-teams-featured {
+        margin-top: 2em;
+    }
+    
+    .hackaton-teams-other {
+        margin-top: 2em;
+    }
+    
+    .hackaton-teams-header {
+        font-size: 2rem;
+        font-family: $font-primary;
+        color: $gray;
+    }
+    
+    .hackaton-teams-list {
+        margin-top: 1em;
+        display: flex;
+        flex-wrap: wrap;
+    }
+    
+    .hackaton-team {
+        background-color: darken($blue-dark, 5%);
+        box-shadow: 0px 0px 10px 0px $blue-light;
+        display: flex;
+        margin-right: 2em;
+        margin-bottom: 2em;
+
+        .data {
+            padding: 2em;
+        }
+        
+        .name {
+            font-weight: 700;
+            font-size: 1.4rem;
+            color: darken($gray, 10%);
+            padding-bottom: 0.3em;
+        }
+
+        .members {
+            border-top: 0.15em solid darken($gray, 10%);
+            padding-top: 0.5em;
+
+            .member {
+                display: flex;
+                align-items: center;
+                height: 1.7em;
+                // margin-top: 0.5em;
+                color: $gray;
+                font-weight: 300;
+                font-size: 1.1rem;
+            }
+
+            .leader {
+
+                &::after {
+                    content: '';
+                    display: inline-block;
+                    background-image: url("../img/icons8-queen-crown-50.png");
+                    background-repeat: no-repeat;
+                    background-size: 1.6em;
+                    width: 1.6em;
+                    height: 1.6em;
+                    margin-left: 0.5em;
+                }
+            }
+        }
+
+        .needed {
+            background-color: darken($blue-dark, 10%);
+            padding: 1.2em;
+            font-weight: 700;
+            font-size: 1.4rem;
+            color: darken($gray, 10%);
+
+            .skill-list {
+                margin-top: 0.3em;
+                font-weight: 400;
+                
+                .skill {
+                    margin-top: 0.2em;
+
+                    &.owned {
+                        color: $success;
+                    }
+
+                    &.not-owned {
+                        color: $error;
+                    }
+                }
+            }
+
+            button {
+                cursor: pointer;
+                margin-top: 1em;
+                border: 0;
+                border-radius: 0.5em;
+                padding: 0.5em;
+                font-size: 1.1rem;
+                font-family: inherit;
+                color: inherit;
+                font-weight: 700;
+                background-color: darken($blue-dark, 5%);
+            }
+        }
+
+    }
+
+}
+
+

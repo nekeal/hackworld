@@ -1,4 +1,5 @@
-let offset = 0;
+let offset = 2;
+let prevSkillInput = "";
 
 $(".next-step").click((e) => {
     e.preventDefault();
@@ -16,17 +17,21 @@ $(".step").css("transform", `translateX(-${offset*100}%)`);
 
 $("#skills").multiselect({});
 
-$(".search-input").on("keydown", (e) => {
-    const searchskill = e.currentTarget.value;
-    console.log(searchskill);
-
-    $.get("/api/skills", { name: searchskill })
-    .done((skills) => {
-        $("#skills").html(skills.map(skill => `<option value="${skill.id}">${skill.name}</option>`).join(""));
-    })
+$(".search-input").on("keyup", (e) => {
+    const skillInput = e.currentTarget.value;
+    
+    if(skillInput !== prevSkillInput) {
+        prevSkillInput = skillInput;
+        console.log(skillInput);
+        $("#skills").empty();
+        $.get("/api/skills", { name: skillInput })
+        .done((skills) => {
+            $("#skills").html(skills.map(skill => `<option value="${skill.id}">${skill.name}</option>`).join(""));
+        })
+    }
 })
 
-$("#location").on("keydown", (e) => {
+$("#location").on("keyup", (e) => {
     const city = e.currentTarget.value;
 
     if(city.length > 1) {

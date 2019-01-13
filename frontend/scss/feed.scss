@@ -2,14 +2,10 @@
 
 @import "partials/menu";
 @import "partials/header";
-@import "partials/form";
-@import "partials/multi-select";
 @import "partials/hackaton";
-@import "partials/hackaton-details";
 
 main {
     flex-grow: 1;
     background-color: $blue-dark;
-    // padding: 1em;
     overflow-x: hidden;
 }

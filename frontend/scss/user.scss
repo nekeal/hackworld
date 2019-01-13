@@ -2,10 +2,10 @@
 
 @import "partials/menu";
 @import "partials/header";
-@import "partials/form";
-@import "partials/multi-select";
-@import "partials/hackaton";
-@import "partials/hackaton-details";
+@import "partials/user-details";
+
+@import "vendors/star-rating";
+
 
 main {
     flex-grow: 1;
