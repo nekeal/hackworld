@@ -1,6 +1,6 @@
 certifi==2018.11.29
 chardet==3.0.4
-Django==2.1.5
+Django==2.2.24
 django-debug-toolbar==1.11
 django-dynamic-formsets==0.0.8
 django-filter==2.0.0
